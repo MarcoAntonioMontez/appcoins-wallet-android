@@ -19,6 +19,7 @@
       android:src="@drawable/ic_app_logo"
       app:layout_anchor="@+id/app_bar"
       app:layout_anchorGravity="start|top"
+
       />
 
   <android.support.v4.widget.SwipeRefreshLayout

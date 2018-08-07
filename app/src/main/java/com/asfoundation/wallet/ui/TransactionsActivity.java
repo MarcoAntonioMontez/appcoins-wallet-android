@@ -42,6 +42,7 @@ import dagger.android.AndroidInjection;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import android.content.Intent;
 
 import static com.asfoundation.wallet.C.ETHEREUM_NETWORK_NAME;
 import static com.asfoundation.wallet.C.ErrorCode.EMPTY_COLLECTION;
@@ -110,10 +111,16 @@ public class TransactionsActivity extends BaseNavigationActivity implements View
     refreshLayout.setOnRefreshListener(() -> viewModel.fetchTransactions(true));
   }
 
+  public void openActivity(){
+    Intent intent = new Intent(this,com.example.quiz.quiz.QuizActivity.class);
+    startActivity(intent);
+  }
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_settings: {
-        viewModel.showSettings(this);
+
+        openActivity();
+        //viewModel.showSettings(this);
       }
       break;
       case R.id.action_deposit: {
