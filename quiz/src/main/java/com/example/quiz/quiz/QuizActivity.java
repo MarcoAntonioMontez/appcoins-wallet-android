@@ -1,21 +1,16 @@
 package com.example.quiz.quiz;
 
-import android.animation.ValueAnimator;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.widget.Button;
-import android.view.*;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieComposition;
 import com.example.quiz.R;
-import com.example.quiz.WheelFragment;
+import com.example.quiz.wheel.WheelFragment;
+import android.support.v4.app.FragmentTransaction;
 
-import java.io.StringReader;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity implements WheelFragment.NextFragListener{
     LottieAnimationView animationView;
     Button button;
 
@@ -51,4 +46,15 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void changeFrag() {
+        QuizFragment newFragment = new QuizFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
 }

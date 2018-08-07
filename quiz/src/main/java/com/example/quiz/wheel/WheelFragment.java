@@ -1,20 +1,40 @@
-package com.example.quiz;
+package com.example.quiz.wheel;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.*;
 import android.widget.Button;
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.quiz.wheel.FragmentCallBack;
+import com.example.quiz.R;
 
 import android.animation.*;
 import android.widget.TextView;
 
 public class WheelFragment extends Fragment {
     LottieAnimationView animationView;
-    Button button;
+    Button buttonWheel;
+    Button buttonNext;
     TextView rewardText;
+
+
+    NextFragListener activityCommander;
+
+    public interface NextFragListener{
+        public void changeFrag();
+    }
+
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+
+        try {
+            activityCommander = (NextFragListener) activity;
+        } catch(ClassCastException e){
+            throw new ClassCastException(activity.toString());
+        }
+
+    }
 
     @Override
     public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -22,7 +42,8 @@ public class WheelFragment extends Fragment {
 
         rewardText=(TextView) view.findViewById(R.id.reward_text);
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
-        button = (Button) view.findViewById(R.id.button_wheel);
+        buttonWheel = (Button) view.findViewById(R.id.button_wheel);
+        buttonNext = (Button) view.findViewById(R.id.button_next);
         animationView.setAnimation("wheel.json");
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
@@ -44,13 +65,25 @@ public class WheelFragment extends Fragment {
             }
         });
 
-                button.setOnClickListener( new View.OnClickListener(){
+        buttonWheel.setOnClickListener( new View.OnClickListener(){
+            public void onClick(View v){
+                animationView.setRepeatCount(1);
+                animationView.playAnimation();
+            }
+        });
+
+        buttonNext.setOnClickListener(
+                new View.OnClickListener(){
                     public void onClick(View v){
-                        animationView.setRepeatCount(1);
-                        animationView.playAnimation();
+                        activityCommander.changeFrag();
                     }
-                });
+                }
+        );
         return view;
     }
+
+//    public void buttonClicked(View view){
+//        activityCommander.changeFrag();
+//    }
 
 }
