@@ -32,7 +32,7 @@ public class WheelFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                rewardText.setText("Congratulations you won 1 Apc!");
+                rewardText.setText("Congratulations you won 1 Appc!");
             }
 
             @Override
