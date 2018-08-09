@@ -1,5 +1,6 @@
 package com.example.quiz.quiz;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -49,6 +50,7 @@ public class QuizActivity extends AppCompatActivity implements WheelFragment.Nex
     @Override
     public void changeFrag() {
         QuizFragment newFragment = new QuizFragment();
+        //LobbyFragment newFragment = new LobbyFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

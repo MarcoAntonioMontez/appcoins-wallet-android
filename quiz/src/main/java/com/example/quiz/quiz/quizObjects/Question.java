@@ -13,6 +13,14 @@ public class Question {
         this.answer=answer;
     }
 
+
+    @Override
+    public String toString() {
+        String newString;
+        newString = "\n\nQuestion: " + question + "\nOptions: " + optionsList.toString() + "\nAnswer: " + answer;
+        return newString;
+    }
+
     private boolean checkInitialParameters(){
         //Checks if answer and questionsList!=NULL
         //checks if answer is in questionsList

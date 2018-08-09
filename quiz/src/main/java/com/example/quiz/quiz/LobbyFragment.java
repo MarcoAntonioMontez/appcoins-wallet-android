@@ -18,7 +18,7 @@ public class LobbyFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.lobby_frag, container, false);
+        View view = inflater.inflate(R.layout.quizv2, container, false);
 
         textView = (TextView) view.findViewById(R.id.lobby_text);
 
