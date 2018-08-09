@@ -11,7 +11,7 @@ import com.example.quiz.wheel.WheelFragment;
 import android.support.v4.app.FragmentTransaction;
 
 
-public class QuizActivity extends AppCompatActivity implements WheelFragment.NextFragListener{
+public class QuizActivity extends AppCompatActivity implements WheelFragment.NextFragListener, QuizFragment.gotoWheelListener{
     LottieAnimationView animationView;
     Button button;
 
@@ -48,15 +48,25 @@ public class QuizActivity extends AppCompatActivity implements WheelFragment.Nex
     }
 
     @Override
-    public void changeFrag() {
+    public void gotoQuizFrag() {
         QuizFragment newFragment = new QuizFragment();
         //LobbyFragment newFragment = new LobbyFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.fragment_container, newFragment);
+        transaction.replace(R.id.fragment_container, newFragment,"QuizFrag");
         transaction.addToBackStack(null);
 
+        transaction.commit();
+    }
+
+    public void gotoWheelFrag() {
+        WheelFragment newFragment = new WheelFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
         transaction.commit();
     }
 }

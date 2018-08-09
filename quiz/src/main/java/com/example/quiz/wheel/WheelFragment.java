@@ -12,6 +12,8 @@ import com.example.quiz.R;
 import android.animation.*;
 import android.widget.TextView;
 
+import com.example.quiz.util.MathUtilsFunc;
+
 public class WheelFragment extends Fragment {
     LottieAnimationView animationView;
     Button buttonWheel;
@@ -22,7 +24,7 @@ public class WheelFragment extends Fragment {
     NextFragListener activityCommander;
 
     public interface NextFragListener{
-        public void changeFrag();
+        public void gotoQuizFrag();
     }
 
     public void onAttach(Activity activity){
@@ -53,7 +55,9 @@ public class WheelFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                rewardText.setText("Congratulations you won 1 Appc!");
+
+
+                rewardText.setText("Congratulations you won " + MathUtilsFunc.truncatedRandomDouble()+" Appc!");
             }
 
             @Override
@@ -75,7 +79,7 @@ public class WheelFragment extends Fragment {
         buttonNext.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                        activityCommander.changeFrag();
+                        activityCommander.gotoQuizFrag();
                     }
                 }
         );

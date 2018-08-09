@@ -1,7 +1,7 @@
 package com.example.quiz.quiz;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,44 +13,61 @@ import android.widget.*;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
 import com.example.quiz.quiz.quizObjects.Question;
+import com.example.quiz.wheel.WheelFragment;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 
 public class QuizFragment extends Fragment{
     LottieAnimationView animationView;
     Button confirmButton;
     Button nextButton;
+    Button changeBtn;
     TextView question;
     RadioButton option_1;
     RadioButton option_2;
     RadioButton option_3;
     RadioButton option_4;
+    RadioGroup radioGroup;
     TextView text_result;
     Question currQuestion;
     LinkedList<Question> questionList;
-
-
-
-
     private final String TAG = "QuizFragment";
 
-    @Override
+    gotoWheelListener activityCommander;
+
+    public interface gotoWheelListener{
+       public void gotoWheelFrag();
+    }
+
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+
+        try {
+            activityCommander = (gotoWheelListener) activity;
+        } catch(ClassCastException e){
+            throw new ClassCastException(activity.toString());
+        }
+
+    }
+
+        @Override
     public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
         confirmButton = (Button) view.findViewById(R.id.confirm_button);
         nextButton = (Button) view.findViewById(R.id.nextBtn);
+        changeBtn = (Button) view.findViewById(R.id.next_frag_btn);
         question = (TextView) view.findViewById(R.id.question_text);
         option_1 = (RadioButton) view.findViewById(R.id.option1_quiz);
         option_2 = (RadioButton) view.findViewById(R.id.option2_quiz);
         option_3 = (RadioButton) view.findViewById(R.id.option3_quiz);
         option_4 = (RadioButton) view.findViewById(R.id.option4_quiz);
         text_result = (TextView) view.findViewById(R.id.text_result);
+        radioGroup = (RadioGroup) view.findViewById(R.id.optionGroup);
+
 
 
 
@@ -90,10 +107,13 @@ public class QuizFragment extends Fragment{
             }
         });
 
+            //activityCommander.gotoQuizFrag();
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!questionList.isEmpty()) {
+                    radioGroup.clearCheck();
                     currQuestion = questionList.remove();
                     updateQuestionText(currQuestion);
                     text_result.setVisibility(View.INVISIBLE);
@@ -102,9 +122,19 @@ public class QuizFragment extends Fragment{
                      hideAll();
                      updateText(text_result, "Quiz Completed!!!");
                      text_result.setVisibility(View.VISIBLE);
+                     changeBtn.setVisibility(View.VISIBLE);
+
+                    changeBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            activityCommander.gotoWheelFrag();
+                        }
+                    });
                 }
             }
         });
+
+
 
         return view;
     }
@@ -113,10 +143,11 @@ public class QuizFragment extends Fragment{
         confirmButton.setVisibility(View.INVISIBLE);
         nextButton.setVisibility(View.INVISIBLE);
         question.setVisibility(View.INVISIBLE);
-        option_1.setVisibility(View.INVISIBLE);
-        option_2.setVisibility(View.INVISIBLE);
-        option_3.setVisibility(View.INVISIBLE);
-        option_4.setVisibility(View.INVISIBLE);
+        //option_1.setVisibility(View.INVISIBLE);
+        //option_2.setVisibility(View.INVISIBLE);
+        //option_3.setVisibility(View.INVISIBLE);
+        //option_4.setVisibility(View.INVISIBLE);
+        radioGroup.setVisibility(View.INVISIBLE);
         text_result.setVisibility(View.INVISIBLE);
         nextButton.setVisibility(View.INVISIBLE);
 
