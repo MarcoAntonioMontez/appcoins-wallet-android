@@ -4,6 +4,7 @@
 
     <application>
         <activity android:name=".quiz.QuizActivity"></activity>
+        <activity android:name=".mvp.MainActivity"></activity>
     </application>
 
 </manifest>
