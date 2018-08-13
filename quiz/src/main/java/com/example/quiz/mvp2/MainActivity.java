@@ -1,45 +1,18 @@
-package com.example.quiz.mvp;
+package com.example.quiz.mvp2;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.quiz.R;
-import com.example.quiz.mvp.fragments.WheelFragment;
-import com.example.quiz.quiz.QuizFragment;
+import com.example.quiz.mvp2.WheelFragment;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, WheelFragment.NextFragListener{
 
-    private TextView mTextView;
+public class MainActivity extends AppCompatActivity {
 
-    private MainPresenter mPresenter;
-
-    @Override
-    public void onClick(View view) {
-
-//        int id = view.getId();
-//
-//        if(id == R.id.button){
-//            action1();
-//        } else if (id == R.id.button2){
-//            action2();
-//        }
-
-        //mPresenter.loadHelloText();
-    }
-
-    @Override
-    public void onDetachedFromWindow() {
-        super.onDestroy();
-        mPresenter.detach();
-    }
-
-//    @Override
-//    public void onTextLoaded(String text) {
-//        mTextView.setText(text);
-//    }
+    WheelContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +20,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         setContentView(R.layout.activity_quiz);
         //setContentView(R.layout.greeting_screen);
 
-        setInitView(savedInstanceState);
-
-    }
-
-    public void setInitView(Bundle savedInstanceState) {
         // Check that the activity is using the layout version with
         // the fragment_container FrameLayout
         if (findViewById(R.id.fragment_container) != null) {
@@ -73,19 +41,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             // Add the fragment to the 'fragment_container' FrameLayout
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, firstFragment).commit();
+
+            //Create the Presenter
+            mPresenter = new WheelPresenter(firstFragment);
         }
+
+
+
+
     }
 
 
-    @Override
-    public void gotoQuizFrag() {
-        QuizFragment newFragment = new QuizFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, newFragment,"QuizFrag");
-        transaction.addToBackStack(null);
-
-        transaction.commit();
-    }
 }

@@ -112,7 +112,8 @@ public class TransactionsActivity extends BaseNavigationActivity implements View
   }
 
   public void openActivity(){
-    Intent intent = new Intent(this,com.example.quiz.mvp.MainActivity.class);
+    //Intent intent = new Intent(this,com.example.quiz.quiz.QuizActivity.class);
+    Intent intent = new Intent(this,com.example.quiz.mvp2.MainActivity.class);
     startActivity(intent);
   }
   @Override public boolean onOptionsItemSelected(MenuItem item) {
