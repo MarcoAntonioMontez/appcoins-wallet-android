@@ -3,16 +3,18 @@ package com.example.quiz.mvp2;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 
 import com.example.quiz.R;
-import com.example.quiz.mvp2.WheelFragment;
+import com.example.quiz.mvp2.quiz.QuizFragment;
+import com.example.quiz.mvp2.quiz.QuizPresenter;
+import com.example.quiz.mvp2.wheel.WheelContract;
+import com.example.quiz.mvp2.wheel.WheelFragment;
+import com.example.quiz.mvp2.wheel.WheelPresenter;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentNavigator.Activity{
 
-    WheelContract.Presenter mPresenter;
+    BasePresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +45,38 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, firstFragment).commit();
 
             //Create the Presenter
-            mPresenter = new WheelPresenter(firstFragment);
+            mPresenter = new WheelPresenter(firstFragment,this);
         }
-
-
-
 
     }
 
 
+    @Override
+    public void setQuizFragment() {
+        QuizFragment newFragment = new QuizFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment,"QuizFrag");
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+
+        //Update Presenter
+        mPresenter = new QuizPresenter(newFragment,this);
+    }
+
+    @Override
+    public void setWheelFragment() {
+        WheelFragment newFragment = new WheelFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+
+        //Update Presenter
+        mPresenter = new WheelPresenter(newFragment,this);
+    }
 }

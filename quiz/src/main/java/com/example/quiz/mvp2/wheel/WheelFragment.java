@@ -1,7 +1,6 @@
-package com.example.quiz.mvp2;
+package com.example.quiz.mvp2.wheel;
 
 import android.animation.Animator;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
-import com.example.quiz.util.MathUtilsFunc;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
     LottieAnimationView animationView;
@@ -62,13 +60,13 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
             }
         });
 
-//        buttonNext.setOnClickListener(
-//                new View.OnClickListener(){
-//                    public void onClick(View v){
-//                        activityCommander.gotoQuizFrag();
-//                    }
-//                }
-//        );
+        buttonNext.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View v){
+                        onClickNextButton();
+                    }
+                }
+        );
         return view;
     }
 
@@ -80,6 +78,11 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     @Override
     public void setRewardText(String text) {
         rewardText.setText(text);
+    }
+
+    @Override
+    public void onClickNextButton() {
+        mPresenter.changeFragment();
     }
 
 
