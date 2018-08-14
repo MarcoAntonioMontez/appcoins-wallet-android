@@ -21,8 +21,8 @@ import java.util.LinkedList;
 public class QuizFragment extends Fragment implements QuizContract.View{
     LottieAnimationView animationView;
     Button confirmButton;
-    Button nextButton;
-    Button changeBtn;
+    Button nextQuestionButton;
+    Button changeFragBtn;
     TextView question;
     RadioButton option_1;
     RadioButton option_2;
@@ -34,7 +34,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     LinkedList<Question> questionList;
     private final String TAG = "QuizFragment";
     QuizContract.Presenter mPresenter;
-    boolean showQuestion;
 
     @Override
     public void setPresenter(QuizContract.Presenter presenter) {
@@ -46,8 +45,8 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         View view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
         confirmButton = (Button) view.findViewById(R.id.confirm_button);
-        nextButton = (Button) view.findViewById(R.id.nextBtn);
-        changeBtn = (Button) view.findViewById(R.id.next_frag_btn);
+        nextQuestionButton = (Button) view.findViewById(R.id.nextBtn);
+        changeFragBtn = (Button) view.findViewById(R.id.next_frag_btn);
         question = (TextView) view.findViewById(R.id.question_text);
         option_1 = (RadioButton) view.findViewById(R.id.option1_quiz);
         option_2 = (RadioButton) view.findViewById(R.id.option2_quiz);
@@ -62,73 +61,52 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 
             confirmButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    RadioButton checkedButton = null;
-                    if (option_1.isChecked()) {
-                        checkedButton = option_1;
-                    } else if (option_2.isChecked()) {
-                        checkedButton = option_2;
-                    } else if (option_3.isChecked()) {
-                        checkedButton = option_3;
-                    } else if (option_4.isChecked()) {
-                        checkedButton = option_4;
-                    }
+                RadioButton checkedButton = null;
+                if (option_1.isChecked()) {
+                    checkedButton = option_1;
+                } else if (option_2.isChecked()) {
+                    checkedButton = option_2;
+                } else if (option_3.isChecked()) {
+                    checkedButton = option_3;
+                } else if (option_4.isChecked()) {
+                    checkedButton = option_4;
+                }
 
-                    if (checkedButton != null) {
-                        if (checkedButton.getText() == currQuestion.getAnswer()) {
-                            updateText(text_result, "Correct Answer!");
-                            nextButton.setVisibility(View.VISIBLE);
-                        } else {
-                            updateText(text_result, "Incorrect Answer!");
-                        }
-                        text_result.setVisibility(View.VISIBLE);
-
-                    }
+                if (checkedButton != null) {
+                    mPresenter.loadAnswerTextNButtons(checkedButton.getText().toString());
+                }
                 }
             });
 
-            //activityCommander.gotoQuizFrag();
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mPresenter.hasQuestions()) {
-                    radioGroup.clearCheck();
-                    mPresenter.loadNextQuestion();
-                    text_result.setVisibility(View.INVISIBLE);
-                    nextButton.setVisibility(View.INVISIBLE);
-                } else{
-                     hideAll();
-                     updateText(text_result, "Quiz Completed!!!");
-                     text_result.setVisibility(View.VISIBLE);
-                     changeBtn.setVisibility(View.VISIBLE);
-
-                    changeBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mPresenter.changeFragment();
-                            //activityCommander.gotoWheelFrag();
-                        }
-                    });
+            nextQuestionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickNextQuestionButton();
                 }
-            }
-        });
+            });
+
+            changeFragBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickNextFragButton();
+                }
+            });
 
 
 
         return view;
     }
 
-    private void hideAll() {
+    public void hideAll() {
         confirmButton.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.INVISIBLE);
+        nextQuestionButton.setVisibility(View.INVISIBLE);
         question.setVisibility(View.INVISIBLE);
-        //option_1.setVisibility(View.INVISIBLE);
-        //option_2.setVisibility(View.INVISIBLE);
-        //option_3.setVisibility(View.INVISIBLE);
-        //option_4.setVisibility(View.INVISIBLE);
+        option_1.setVisibility(View.INVISIBLE);
+        option_2.setVisibility(View.INVISIBLE);
+        option_3.setVisibility(View.INVISIBLE);
+        option_4.setVisibility(View.INVISIBLE);
         radioGroup.setVisibility(View.INVISIBLE);
         text_result.setVisibility(View.INVISIBLE);
-        nextButton.setVisibility(View.INVISIBLE);
 
     }
     public void updateText(TextView line, String str){
@@ -146,7 +124,51 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
-    public void onClickNextButton() {
+    public void updateAnswerText(String text) {
+        updateText(text_result, text);
+    }
+
+    public void initRadioGroup(){
+        radioGroup.clearCheck();
+    }
+
+    @Override
+    public void setNextButtonVisibility(boolean visibility) {
+        if(visibility){
+            nextQuestionButton.setVisibility(View.VISIBLE);
+        }else{
+            nextQuestionButton.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    @Override
+    public void setChangeFragButtonVisibility(boolean visibility) {
+        if(visibility){
+            changeFragBtn.setVisibility(View.VISIBLE);
+        }else{
+            changeFragBtn.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void setAnswerVisibility(boolean visibility) {
+        if(visibility){
+            text_result.setVisibility(View.VISIBLE);
+        }else{
+            text_result.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onClickNextFragButton() {
         mPresenter.changeFragment();
     }
+
+    @Override
+    public void onClickNextQuestionButton() {
+        mPresenter.loadNextQuestion();
+    }
+
+
 }

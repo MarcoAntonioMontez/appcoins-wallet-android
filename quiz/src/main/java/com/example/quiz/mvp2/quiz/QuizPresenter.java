@@ -1,6 +1,7 @@
 package com.example.quiz.mvp2.quiz;
 
 import com.example.quiz.mvp2.FragmentNavigator;
+import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.mvp2.wheel.WheelContract;
 import com.example.quiz.quiz.quizObjects.Question;
 
@@ -11,7 +12,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
     FragmentNavigator.Activity fragmentNavigator;
     private LinkedList<Question> questionsList = new LinkedList<Question>();
     private Question currQuestion;
-    private boolean hasQuestions=false;
+    int score=0;
+    boolean firstAnswerAttempt=false;
 
     @Override
     public void changeFragment() {
@@ -19,18 +21,40 @@ public class QuizPresenter  implements QuizContract.Presenter {
     }
 
     @Override
-    public void loadNextQuestion() {
+    public Question loadNextQuestion() {
+        firstAnswerAttempt=true;
         if(!questionsList.isEmpty()){
             currQuestion=questionsList.remove();
             quizContractView.updateQuestionText(currQuestion);
-            hasQuestions=true;
+            quizContractView.setNextButtonVisibility(false);
+            quizContractView.setAnswerVisibility(false);
+            quizContractView.initRadioGroup();
+        }else{
+
+            quizContractView.hideAll();
+            quizContractView.updateAnswerText("You completed the quiz! \n\n Score: " + score + " out of 3");
+            quizContractView.setAnswerVisibility(true);
+            quizContractView.setChangeFragButtonVisibility(true);
+            currQuestion=null;
         }
-        hasQuestions=false;
+        return currQuestion;
     }
 
     @Override
-    public boolean hasQuestions() {
-        return hasQuestions;
+    public void loadAnswerTextNButtons(String chosenOption) {
+        if(currQuestion!=null){
+            quizContractView.setAnswerVisibility(true);
+            if(currQuestion.getAnswer().equals(chosenOption)){
+                quizContractView.updateAnswerText("Correct Answer!");
+                quizContractView.setNextButtonVisibility(true);
+                if(firstAnswerAttempt){
+                    score++;
+                }
+            }else {
+                quizContractView.updateAnswerText("Incorrect Answer!");
+            }
+        }
+        firstAnswerAttempt=false;
     }
 
     @Override

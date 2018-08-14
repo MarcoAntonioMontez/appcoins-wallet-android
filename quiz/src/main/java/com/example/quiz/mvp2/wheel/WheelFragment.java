@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
+import com.example.quiz.mvp2.FragmentNavigator;
+import com.example.quiz.mvp2.MainActivity;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
     LottieAnimationView animationView;
@@ -19,6 +22,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     Button buttonNext;
     TextView rewardText;
     WheelContract.Presenter mPresenter;
+    MainActivity myActivity;
 
     @Override
     public void setPresenter(WheelContract.Presenter presenter) {
@@ -33,6 +37,8 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         buttonWheel = (Button) view.findViewById(R.id.button_wheel);
         buttonNext = (Button) view.findViewById(R.id.button_next);
         animationView.setAnimation("wheel.json");
+
+        myActivity= (MainActivity) getActivity();
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override

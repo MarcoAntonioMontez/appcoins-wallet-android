@@ -15,6 +15,7 @@ import com.example.quiz.mvp2.wheel.WheelPresenter;
 public class MainActivity extends AppCompatActivity implements FragmentNavigator.Activity{
 
     BasePresenter mPresenter;
+    private double reward=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
                     .add(R.id.fragment_container, firstFragment).commit();
 
             //Create the Presenter
-            mPresenter = new WheelPresenter(firstFragment,this);
+            mPresenter = new WheelPresenter(firstFragment,this,this);
         }
 
     }
@@ -77,6 +78,16 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         transaction.commit();
 
         //Update Presenter
-        mPresenter = new WheelPresenter(newFragment,this);
+        mPresenter = new WheelPresenter(newFragment,this, this);
+    }
+
+    public double getRewardValue(){
+        return reward;
+    }
+
+    public void saveRewardValue(double reward) {
+        if(this.reward==-1){
+            this.reward=reward;
+        }
     }
 }

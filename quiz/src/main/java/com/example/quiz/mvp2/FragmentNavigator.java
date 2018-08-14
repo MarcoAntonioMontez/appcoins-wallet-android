@@ -7,7 +7,4 @@ public interface FragmentNavigator {
         void setQuizFragment();
         void setWheelFragment();
     }
-
-    interface Presenter{
-    }
 }

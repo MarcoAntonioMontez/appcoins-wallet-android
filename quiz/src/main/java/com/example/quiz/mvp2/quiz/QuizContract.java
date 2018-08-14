@@ -6,13 +6,20 @@ import com.example.quiz.quiz.quizObjects.Question;
 
 public interface QuizContract {
     interface View extends BaseView<Presenter> {
-        public void onClickNextButton();
+        public void onClickNextFragButton();
+        public void onClickNextQuestionButton();
         public void updateQuestionText(Question question);
+        public void updateAnswerText(String text);
+        public void setNextButtonVisibility(boolean visibility);
+        public void setChangeFragButtonVisibility(boolean visibility);
+        public void setAnswerVisibility(boolean visibility);
+        public void hideAll();
+        public void initRadioGroup();
     }
 
     interface Presenter extends BasePresenter {
         public void changeFragment();
-        public void loadNextQuestion();
-        public boolean hasQuestions();
+        public Question loadNextQuestion();
+        public void loadAnswerTextNButtons(String chosenOption);
     }
 }
