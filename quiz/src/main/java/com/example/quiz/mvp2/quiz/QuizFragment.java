@@ -13,7 +13,11 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
+import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.quiz.quizObjects.Question;
+import com.example.quiz.quiz.quizObjects.RewardSaver;
+
+import org.w3c.dom.Text;
 
 import java.util.LinkedList;
 
@@ -30,10 +34,17 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     RadioButton option_4;
     RadioGroup radioGroup;
     TextView text_result;
+    TextView wheelScoreText;
+    TextView quizScoreText;
+    TextView totalScoreText;
+
+
     Question currQuestion;
     LinkedList<Question> questionList;
     private final String TAG = "QuizFragment";
-    QuizContract.Presenter mPresenter;
+    private QuizContract.Presenter mPresenter;
+    private MainActivity myActivity;
+    private RewardSaver rewardSaver;
 
     @Override
     public void setPresenter(QuizContract.Presenter presenter) {
@@ -54,6 +65,13 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         option_4 = (RadioButton) view.findViewById(R.id.option4_quiz);
         text_result = (TextView) view.findViewById(R.id.text_result);
         radioGroup = (RadioGroup) view.findViewById(R.id.optionGroup);
+        wheelScoreText = (TextView) view.findViewById(R.id.wheelScore);
+        quizScoreText = (TextView) view.findViewById(R.id.quizScore);
+        totalScoreText = (TextView) view.findViewById(R.id.totalReward);
+
+
+            myActivity= (MainActivity) getActivity();
+        rewardSaver=myActivity.getRewardSaver();
 
 
             mPresenter.loadNextQuestion();
@@ -113,7 +131,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         line.setText(str);
     }
 
-    public void updateQuestionText(Question newQuestion){
+    public void updateQuestionTextAndOptions(Question newQuestion){
         LinkedList<String> optionsList = newQuestion.getOptionsList();
         question.setText(newQuestion.getQuestion());
 
@@ -130,6 +148,25 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 
     public void initRadioGroup(){
         radioGroup.clearCheck();
+    }
+
+    @Override
+    public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText) {
+       this.wheelScoreText.setText(wheelScoreText);
+       this.quizScoreText.setText(quizScoreText);
+       this.totalScoreText.setText(totalScoreText);
+    }
+
+    public void setEndScreenTextVisibility(boolean visibility){
+        if(visibility){
+            wheelScoreText.setVisibility(View.VISIBLE);
+            quizScoreText.setVisibility(View.VISIBLE);
+            totalScoreText.setVisibility(View.VISIBLE);
+        }else{
+            wheelScoreText.setVisibility(View.INVISIBLE);
+            quizScoreText.setVisibility(View.INVISIBLE);
+            totalScoreText.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -161,6 +198,15 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
+    public void setQuestionVisibility(boolean visibility) {
+        if(visibility){
+            question.setVisibility(View.VISIBLE);
+        }else{
+            question.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
     public void onClickNextFragButton() {
         mPresenter.changeFragment();
     }
@@ -168,6 +214,11 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     @Override
     public void onClickNextQuestionButton() {
         mPresenter.loadNextQuestion();
+    }
+
+    @Override
+    public void updateQuestionText(String text) {
+        question.setText(text);
     }
 
 

@@ -45,6 +45,55 @@
         android:text="This is a really really really long text, so long in fact that i want and i really want to keep it centered"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/wheelScore"
+        android:layout_below="@+id/question_text"
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Wheel: 0.5 Apc"
+        android:textSize="24sp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:textColor="@android:color/holo_green_dark"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/quizScore"
+        android:layout_below="@+id/wheelScore"
+        android:layout_marginTop="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Quiz Score: 3 (X)"
+        android:textSize="24sp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:textColor="@android:color/holo_green_light"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/totalReward"
+        android:layout_below="@+id/question_text"
+        android:layout_marginTop="270dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Total Reward"
+        android:textSize="24sp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible" />
+
+
+
 
     <RadioGroup
         android:id="@+id/optionGroup"

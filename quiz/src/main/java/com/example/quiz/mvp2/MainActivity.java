@@ -10,16 +10,19 @@ import com.example.quiz.mvp2.quiz.QuizPresenter;
 import com.example.quiz.mvp2.wheel.WheelContract;
 import com.example.quiz.mvp2.wheel.WheelFragment;
 import com.example.quiz.mvp2.wheel.WheelPresenter;
+import com.example.quiz.quiz.quizObjects.RewardSaver;
 
 
 public class MainActivity extends AppCompatActivity implements FragmentNavigator.Activity{
 
     BasePresenter mPresenter;
-    private double reward=-1;
+    private RewardSaver rewardSaver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rewardSaver = new RewardSaver();
+
         setContentView(R.layout.activity_quiz);
         //setContentView(R.layout.greeting_screen);
 
@@ -46,11 +49,14 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
                     .add(R.id.fragment_container, firstFragment).commit();
 
             //Create the Presenter
-            mPresenter = new WheelPresenter(firstFragment,this,this);
+            mPresenter = new WheelPresenter(firstFragment,this,rewardSaver);
         }
 
     }
 
+    public RewardSaver getRewardSaver(){
+        return rewardSaver;
+    }
 
     @Override
     public void setQuizFragment() {
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         transaction.commit();
 
         //Update Presenter
-        mPresenter = new QuizPresenter(newFragment,this);
+        mPresenter = new QuizPresenter(newFragment,this, rewardSaver);
     }
 
     @Override
@@ -78,16 +84,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         transaction.commit();
 
         //Update Presenter
-        mPresenter = new WheelPresenter(newFragment,this, this);
+        mPresenter = new WheelPresenter(newFragment,this, rewardSaver);
     }
 
-    public double getRewardValue(){
-        return reward;
-    }
-
-    public void saveRewardValue(double reward) {
-        if(this.reward==-1){
-            this.reward=reward;
-        }
-    }
 }

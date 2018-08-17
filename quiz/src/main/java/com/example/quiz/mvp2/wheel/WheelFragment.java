@@ -15,6 +15,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
+import com.example.quiz.quiz.quizObjects.RewardSaver;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
     LottieAnimationView animationView;
@@ -23,6 +24,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     TextView rewardText;
     WheelContract.Presenter mPresenter;
     MainActivity myActivity;
+    RewardSaver rewardSaver;
 
     @Override
     public void setPresenter(WheelContract.Presenter presenter) {
@@ -39,6 +41,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         animationView.setAnimation("wheel.json");
 
         myActivity= (MainActivity) getActivity();
+        rewardSaver=myActivity.getRewardSaver();
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
@@ -81,6 +84,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         animationView.playAnimation();
     }
 
+
     @Override
     public void setRewardText(String text) {
         rewardText.setText(text);
@@ -89,6 +93,25 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     @Override
     public void onClickNextButton() {
         mPresenter.changeFragment();
+    }
+
+    @Override
+    public void setWheelSpinButtonVisibility(boolean visibility) {
+        if(visibility){
+            buttonWheel.setVisibility(View.VISIBLE);
+        }  else{
+           buttonWheel.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    @Override
+    public void setNextFragButtonVisibility(boolean visibility) {
+        if(visibility){
+            buttonNext.setVisibility(View.VISIBLE);
+        }  else{
+            buttonNext.setVisibility(View.INVISIBLE);
+        }
     }
 
 

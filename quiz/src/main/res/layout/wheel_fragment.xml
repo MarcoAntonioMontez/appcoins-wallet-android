@@ -37,7 +37,8 @@
         android:layout_alignEnd="@+id/lottie_view"
         android:layout_alignTop="@+id/button_wheel"
         android:text="Next Frag"
-        android:layout_alignRight="@+id/lottie_view" />
+        android:layout_alignRight="@+id/lottie_view"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/reward_text"

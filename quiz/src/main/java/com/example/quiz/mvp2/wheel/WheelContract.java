@@ -12,12 +12,13 @@ public interface WheelContract {
     interface View extends BaseView<Presenter> {
         void setRewardText(String Text);
         void onClickNextButton();
+        void setWheelSpinButtonVisibility(boolean visibility);
+        void setNextFragButtonVisibility(boolean visibility);
     }
 
     interface Presenter extends BasePresenter {
         void loadRewardText();
         void changeFragment();
-        void saveRewardOnActivity( double rewardValue);
 
     }
 }

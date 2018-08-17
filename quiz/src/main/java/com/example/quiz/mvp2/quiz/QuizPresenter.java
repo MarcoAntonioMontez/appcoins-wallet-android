@@ -4,6 +4,7 @@ import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.mvp2.wheel.WheelContract;
 import com.example.quiz.quiz.quizObjects.Question;
+import com.example.quiz.quiz.quizObjects.RewardSaver;
 
 import java.util.LinkedList;
 
@@ -14,6 +15,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
     private Question currQuestion;
     int score=0;
     boolean firstAnswerAttempt=false;
+    RewardSaver rewardSaver;
 
     @Override
     public void changeFragment() {
@@ -25,19 +27,33 @@ public class QuizPresenter  implements QuizContract.Presenter {
         firstAnswerAttempt=true;
         if(!questionsList.isEmpty()){
             currQuestion=questionsList.remove();
-            quizContractView.updateQuestionText(currQuestion);
+            quizContractView.updateQuestionTextAndOptions(currQuestion);
             quizContractView.setNextButtonVisibility(false);
             quizContractView.setAnswerVisibility(false);
             quizContractView.initRadioGroup();
         }else{
 
             quizContractView.hideAll();
-            quizContractView.updateAnswerText("You completed the quiz! \n\n Score: " + score + " out of 3");
-            quizContractView.setAnswerVisibility(true);
+            quizContractView.setAnswerVisibility(false);
+            rewardSaver.setQuizScore(score);
+
+            setEndScreenText();
+
             quizContractView.setChangeFragButtonVisibility(true);
             currQuestion=null;
         }
         return currQuestion;
+    }
+
+    public void setEndScreenText(){
+        String wheelText="Wheel reward: " + rewardSaver.getReward() + " Apc";
+        String quizScoreText="Quiz Score: "+ score + " -> " + (3.0*rewardSaver.getReward()) + "Apc";
+        String totalScoreText="Total reward: "+ rewardSaver.getTotalScore()+ " Apc";
+
+
+        quizContractView.setEndScreenRewardText(wheelText,quizScoreText,totalScoreText);
+        quizContractView.setEndScreenTextVisibility(true);
+
     }
 
     @Override
@@ -62,9 +78,10 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
     }
 
-    public QuizPresenter(QuizContract.View quizContractView, FragmentNavigator.Activity fragmentNavigator){
+    public QuizPresenter(QuizContract.View quizContractView, FragmentNavigator.Activity fragmentNavigator, RewardSaver rewardSaver){
         this.quizContractView=quizContractView;
         this.fragmentNavigator=fragmentNavigator;
+        this.rewardSaver=rewardSaver;
         quizContractView.setPresenter(this);
 
         questionsList=loadQuestions();
