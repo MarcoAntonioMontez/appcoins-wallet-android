@@ -1,5 +1,7 @@
 package com.example.quiz.quiz.quizObjects;
 
+import com.example.quiz.util.MathUtilsFunc;
+
 public class RewardSaver {
     private double wheelReward;
     private double quizScore;
@@ -21,7 +23,7 @@ public class RewardSaver {
     }
 
     public double getTotalScore(){
-        return (quizScore+1.0) * wheelReward;
+        return MathUtilsFunc.roundTwoDecimals((quizScore+(double)(1.0)) * wheelReward);
     }
 
 }

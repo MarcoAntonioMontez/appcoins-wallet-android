@@ -1,5 +1,6 @@
 package com.example.quiz.mvp2.quiz;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,7 +27,7 @@ import java.util.LinkedList;
 public class QuizFragment extends Fragment implements QuizContract.View{
     LottieAnimationView animationView;
     Button confirmButton;
-    Button nextQuestionButton;
+    ImageView nextQuestionButton;
     Button changeFragBtn;
     TextView question;
     RadioButton option_1;
@@ -56,7 +58,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         View view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
         confirmButton = (Button) view.findViewById(R.id.confirm_button);
-        nextQuestionButton = (Button) view.findViewById(R.id.nextBtn);
+        nextQuestionButton = (ImageView) view.findViewById(R.id.next_arrow_quiz);
         changeFragBtn = (Button) view.findViewById(R.id.next_frag_btn);
         question = (TextView) view.findViewById(R.id.question_text);
         option_1 = (RadioButton) view.findViewById(R.id.option1_quiz);
@@ -143,7 +145,13 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 
     @Override
     public void updateAnswerText(String text) {
+
         updateText(text_result, text);
+        text_result.setTextColor(Color.GREEN);
+    }
+
+    public void updateAnswerColor(int textColor){
+        text_result.setTextColor(textColor);
     }
 
     public void initRadioGroup(){
@@ -166,6 +174,15 @@ public class QuizFragment extends Fragment implements QuizContract.View{
             wheelScoreText.setVisibility(View.INVISIBLE);
             quizScoreText.setVisibility(View.INVISIBLE);
             totalScoreText.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void setConfirmButtonVisibility(boolean visibility) {
+        if(visibility){
+            confirmButton.setVisibility(View.VISIBLE);
+        }else{
+            confirmButton.setVisibility(View.INVISIBLE);
         }
     }
 

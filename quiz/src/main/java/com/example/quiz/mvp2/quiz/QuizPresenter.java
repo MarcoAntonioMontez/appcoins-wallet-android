@@ -1,5 +1,7 @@
 package com.example.quiz.mvp2.quiz;
 
+import android.graphics.Color;
+
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.mvp2.wheel.WheelContract;
@@ -14,6 +16,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
     private LinkedList<Question> questionsList = new LinkedList<Question>();
     private Question currQuestion;
     int score=0;
+    int numberAnswers=3;
     boolean firstAnswerAttempt=false;
     RewardSaver rewardSaver;
 
@@ -25,6 +28,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
     @Override
     public Question loadNextQuestion() {
         firstAnswerAttempt=true;
+        quizContractView.setConfirmButtonVisibility(true);
         if(!questionsList.isEmpty()){
             currQuestion=questionsList.remove();
             quizContractView.updateQuestionTextAndOptions(currQuestion);
@@ -35,7 +39,6 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
             quizContractView.hideAll();
             quizContractView.setAnswerVisibility(false);
-            rewardSaver.setQuizScore(score);
 
             setEndScreenText();
 
@@ -46,9 +49,11 @@ public class QuizPresenter  implements QuizContract.Presenter {
     }
 
     public void setEndScreenText(){
+        rewardSaver.setQuizScore(score);
         String wheelText="Wheel reward: " + rewardSaver.getReward() + " Apc";
-        String quizScoreText="Quiz Score: "+ score + " -> " + (3.0*rewardSaver.getReward()) + "Apc";
-        String totalScoreText="Total reward: "+ rewardSaver.getTotalScore()+ " Apc";
+        String quizScoreText="Quiz Score: \n\n"+ "  Correct answers: "+score+" -> " + ((double)score*rewardSaver.getReward())
+                + " Apc"+"\n\n  Incorrect answers: " + Math.max(0,(numberAnswers-score)) + " -> 0 Apc";
+        String totalScoreText="\n\n\n\nTotal reward: "+ rewardSaver.getTotalScore()+ " Apc";
 
 
         quizContractView.setEndScreenRewardText(wheelText,quizScoreText,totalScoreText);
@@ -60,15 +65,18 @@ public class QuizPresenter  implements QuizContract.Presenter {
     public void loadAnswerTextNButtons(String chosenOption) {
         if(currQuestion!=null){
             quizContractView.setAnswerVisibility(true);
+            quizContractView.setNextButtonVisibility(true);
             if(currQuestion.getAnswer().equals(chosenOption)){
-                quizContractView.updateAnswerText("Correct Answer!");
-                quizContractView.setNextButtonVisibility(true);
+                quizContractView.updateAnswerText("Correct!");
+                quizContractView.updateAnswerColor(Color.rgb(18,173,42));
                 if(firstAnswerAttempt){
                     score++;
                 }
             }else {
-                quizContractView.updateAnswerText("Incorrect Answer!");
+                quizContractView.updateAnswerText("Wrong answer\n\nCorrect answer is: " + currQuestion.getAnswer());
+                quizContractView.updateAnswerColor(Color.RED);
             }
+            quizContractView.setConfirmButtonVisibility(false);
         }
         firstAnswerAttempt=false;
     }

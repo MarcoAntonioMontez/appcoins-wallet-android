@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -19,8 +20,7 @@ import com.example.quiz.quiz.quizObjects.RewardSaver;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
     LottieAnimationView animationView;
-    Button buttonWheel;
-    Button buttonNext;
+    ImageView buttonNext;
     TextView rewardText;
     WheelContract.Presenter mPresenter;
     MainActivity myActivity;
@@ -36,12 +36,12 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
 
         rewardText=(TextView) view.findViewById(R.id.reward_text);
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
-        buttonWheel = (Button) view.findViewById(R.id.button_wheel);
-        buttonNext = (Button) view.findViewById(R.id.button_next);
+        buttonNext = (ImageView) view.findViewById(R.id.next_arrow_wheel);
         animationView.setAnimation("wheel.json");
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
+
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
@@ -63,11 +63,19 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         });
 
         //Run Lottie Animation On Click
-        buttonWheel.setOnClickListener( new View.OnClickListener(){
+//        buttonWheel.setOnClickListener( new View.OnClickListener(){
+//            public void onClick(View v){
+//                runWheelAnimation(animationView);
+//            }
+//        });
+
+        animationView.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v){
-                runWheelAnimation(animationView);
+                onClickWheelButton();
             }
         });
+
+
 
         buttonNext.setOnClickListener(
                 new View.OnClickListener(){
@@ -95,15 +103,6 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         mPresenter.changeFragment();
     }
 
-    @Override
-    public void setWheelSpinButtonVisibility(boolean visibility) {
-        if(visibility){
-            buttonWheel.setVisibility(View.VISIBLE);
-        }  else{
-           buttonWheel.setVisibility(View.INVISIBLE);
-        }
-
-    }
 
     @Override
     public void setNextFragButtonVisibility(boolean visibility) {
@@ -111,6 +110,25 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
             buttonNext.setVisibility(View.VISIBLE);
         }  else{
             buttonNext.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onClickWheelButton() {
+        mPresenter.runWheel();
+    }
+
+    @Override
+    public void animateWheel() {
+        runWheelAnimation(animationView);
+    }
+
+    @Override
+    public void setRewardTextVisibility(boolean visibility) {
+        if(visibility){
+            rewardText.setVisibility(View.VISIBLE);
+        }  else{
+            rewardText.setVisibility(View.INVISIBLE);
         }
     }
 

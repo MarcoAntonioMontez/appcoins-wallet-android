@@ -12,6 +12,7 @@ public class WheelPresenter implements WheelContract.Presenter {
     private FragmentNavigator.Activity fragmentNavigator;
     private WheelContract.View wheelContractView;
     RewardSaver rewardSaver;
+    private boolean firstWheelRun = true;
 
     public WheelPresenter(WheelContract.View wheelContractView, FragmentNavigator.Activity fragmentNavigator,RewardSaver rewardSaver){
         this.wheelContractView=wheelContractView;
@@ -27,12 +28,21 @@ public class WheelPresenter implements WheelContract.Presenter {
     }
 
     @Override
+    public void runWheel() {
+        if(firstWheelRun){
+            wheelContractView.setRewardTextVisibility(false);
+            wheelContractView.animateWheel();
+            firstWheelRun=false;
+        }
+    }
+
+    @Override
     public void loadRewardText() {
         double reward=MathUtilsFunc.truncatedRandomDouble();
         rewardSaver.setReward(reward);
         String str = "Congratulations you won " + reward +" Appc!";
         wheelContractView.setRewardText(str);
-        wheelContractView.setWheelSpinButtonVisibility(false);
+        wheelContractView.setRewardTextVisibility(true);
         wheelContractView.setNextFragButtonVisibility(true);
     }
 

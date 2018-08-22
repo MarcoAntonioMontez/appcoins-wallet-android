@@ -11,6 +11,7 @@ public interface QuizContract {
         public void updateQuestionTextAndOptions(Question question);
         public void updateQuestionText(String text);
         public void updateAnswerText(String text);
+        public void updateAnswerColor(int textColor);
         public void setNextButtonVisibility(boolean visibility);
         public void setChangeFragButtonVisibility(boolean visibility);
         public void setAnswerVisibility(boolean visibility);
@@ -19,6 +20,7 @@ public interface QuizContract {
         public void initRadioGroup();
         public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
         public void setEndScreenTextVisibility(boolean visibility);
+        public void setConfirmButtonVisibility(boolean visibility);
     }
 
     interface Presenter extends BasePresenter {
