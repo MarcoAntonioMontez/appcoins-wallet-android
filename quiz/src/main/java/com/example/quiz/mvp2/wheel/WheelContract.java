@@ -16,6 +16,7 @@ public interface WheelContract {
         void onClickWheelButton();
         void animateWheel();
         void setRewardTextVisibility(boolean visibility);
+        public void showRewardAdder(double reward);
 
     }
 

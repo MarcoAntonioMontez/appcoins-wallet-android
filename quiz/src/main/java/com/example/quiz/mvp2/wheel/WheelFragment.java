@@ -21,6 +21,7 @@ import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.quiz.quizObjects.OnSwipeTouchListener;
 import com.example.quiz.quiz.quizObjects.RewardSaver;
+import com.example.quiz.util.MathUtilsFunc;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
     LottieAnimationView animationView;
@@ -30,6 +31,14 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     MainActivity myActivity;
     RewardSaver rewardSaver;
     Context context;
+    TextView timerText;
+
+    long timeInMilliseconds= 2000; //milisec
+    final long timeDivisions=50;
+    long tickTime = (timeInMilliseconds/timeDivisions);
+
+    double currentReward=0;
+    double newReward;
 
     @Override
     public void setPresenter(WheelContract.Presenter presenter) {
@@ -43,6 +52,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
         buttonNext = (ImageView) view.findViewById(R.id.next_arrow_wheel);
         animationView.setAnimation("wheel.json");
+        timerText = (TextView) view.findViewById(R.id.wheel_timer_text);
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
@@ -130,34 +140,23 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         }
     }
 
-//    public void showRewardAdder(double reward){
-//        long timeInMilliseconds= 2000; //2sec
-//        long timeDivisions=50;
-//        long tickTime = (timeInMilliseconds/timeDivisions);
-//
-//        CountDownTimer countDownTimer = new CountDownTimer(timeInMilliseconds, tickTime) {
-//            @Override
-//            public void onTick(long l) {
-//                updateTimerColor((int) l / 1000);
-//                quizContractView.changeTimerText("" + (int) l / 1000);
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                timerRunning = false;
-//                if (!quizContractView.isQuestionAnswered()) {
-//                    quizContractView.setAnswerVisibility(true);
-//                    quizContractView.setNextButtonVisibility(true);
-//                    quizContractView.updateAnswerText("Time has run out :(");
-//                    quizContractView.updateAnswerColor(Color.RED);
-//                    quizContractView.setConfirmButtonVisibility(false);
-//                } else {
-//                    quizContractView.changeTimerText("End");
-//                }
-//            }
-//        }.start();
-//
-//    }
+    public void showRewardAdder(final double reward){
+        this.newReward=reward;
+
+        CountDownTimer countDownTimer = new CountDownTimer(timeInMilliseconds, tickTime) {
+            @Override
+            public void onTick(long l) {
+                currentReward=currentReward+(newReward/(double)timeDivisions);
+                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward));
+            }
+
+            @Override
+            public void onFinish() {
+                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(reward));
+            }
+        }.start();
+
+    }
 
 
 }
