@@ -1,6 +1,7 @@
 package com.example.quiz.mvp2.quiz;
 
 import android.graphics.Color;
+import android.os.CountDownTimer;
 
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
@@ -19,6 +20,10 @@ public class QuizPresenter  implements QuizContract.Presenter {
     int numberAnswers=3;
     boolean firstAnswerAttempt=false;
     RewardSaver rewardSaver;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMilliseconds = 20000; // 20 seg
+    private boolean timerRunning=true;
+
 
     @Override
     public void changeFragment() {
@@ -30,6 +35,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
         firstAnswerAttempt=true;
         quizContractView.setConfirmButtonVisibility(true);
         if(!questionsList.isEmpty()){
+            startTimer();
             currQuestion=questionsList.remove();
             quizContractView.updateQuestionTextAndOptions(currQuestion);
             quizContractView.setNextButtonVisibility(false);
@@ -52,7 +58,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
         rewardSaver.setQuizScore(score);
         String wheelText="Wheel reward: " + rewardSaver.getReward() + " Apc";
         String quizScoreText="Quiz Score: \n\n"+ "  Correct answers: "+score+" -> " + ((double)score*rewardSaver.getReward())
-                + " Apc"+"\n\n  Incorrect answers: " + Math.max(0,(numberAnswers-score)) + " -> 0 Apc";
+                + " Apc"+"\n\n  Incorrect answers: " + (numberAnswers-score) + " -> 0 Apc";
         String totalScoreText="\n\n\n\nTotal reward: "+ rewardSaver.getTotalScore()+ " Apc";
 
 
@@ -69,20 +75,26 @@ public class QuizPresenter  implements QuizContract.Presenter {
             if(currQuestion.getAnswer().equals(chosenOption)){
                 quizContractView.updateAnswerText("Correct!");
                 quizContractView.updateAnswerColor(Color.rgb(18,173,42));
-                if(firstAnswerAttempt){
-                    score++;
-                }
+                score++;
+
             }else {
                 quizContractView.updateAnswerText("Wrong answer\n\nCorrect answer is: " + currQuestion.getAnswer());
                 quizContractView.updateAnswerColor(Color.RED);
             }
             quizContractView.setConfirmButtonVisibility(false);
+            cancelTimer();
         }
-        firstAnswerAttempt=false;
+
     }
 
     @Override
     public void start() {
+
+    }
+
+    public void cancelTimer(){
+        countDownTimer.cancel();
+        quizContractView.changeTimerText("");
 
     }
 
@@ -157,4 +169,51 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
         return questionList;
     }
+
+    public void startTimer(){
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+            @Override
+            public void onTick(long l) {
+                updateTimerColor((int)l/1000);
+                quizContractView.changeTimerText(""+(int)l/1000);
+            }
+
+            @Override
+            public void onFinish() {
+                timerRunning=false;
+                if(!quizContractView.isQuestionAnswered()){
+                    quizContractView.setAnswerVisibility(true);
+                    quizContractView.setNextButtonVisibility(true);
+                    quizContractView.updateAnswerText("Time has run out :(");
+                    quizContractView.updateAnswerColor(Color.RED);
+                    quizContractView.setConfirmButtonVisibility(false);
+                }else{
+                    quizContractView.changeTimerText("End");
+                }
+            }
+        }.start();
+
+    }
+
+    public void updateTimerColor(int timeLeft){
+        final int startTime=19;
+        final int mediumTimeLeft=10;
+        final int lowTimeLeft=5;
+
+        switch (timeLeft){
+
+            case startTime : quizContractView.setTimerTextColor(Color.rgb(144,238,144));
+                            break;
+
+            case mediumTimeLeft : quizContractView.setTimerTextColor(Color.rgb(255,165,0));
+                    break;
+
+            case lowTimeLeft: quizContractView.setTimerTextColor(Color.RED);
+                    break;
+
+            default: break;
+        }
+
+    }
+
 }

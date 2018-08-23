@@ -1,7 +1,10 @@
 package com.example.quiz.mvp2.wheel;
 
 import android.animation.Animator;
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +19,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
+import com.example.quiz.quiz.quizObjects.OnSwipeTouchListener;
 import com.example.quiz.quiz.quizObjects.RewardSaver;
 
 public class WheelFragment extends Fragment implements  WheelContract.View{
@@ -25,6 +29,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     WheelContract.Presenter mPresenter;
     MainActivity myActivity;
     RewardSaver rewardSaver;
+    Context context;
 
     @Override
     public void setPresenter(WheelContract.Presenter presenter) {
@@ -41,7 +46,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
-
+        context=view.getContext();
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
@@ -62,20 +67,13 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
             }
         });
 
-        //Run Lottie Animation On Click
-//        buttonWheel.setOnClickListener( new View.OnClickListener(){
-//            public void onClick(View v){
-//                runWheelAnimation(animationView);
-//            }
-//        });
-
-        animationView.setOnClickListener( new View.OnClickListener(){
-            public void onClick(View v){
-                onClickWheelButton();
+        animationView.setOnClickListener(
+                new View.OnClickListener(){
+                public void onClick(View v){
+                    onClickWheelButton();
+                }
             }
-        });
-
-
+        );
 
         buttonNext.setOnClickListener(
                 new View.OnClickListener(){
@@ -131,6 +129,35 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
             rewardText.setVisibility(View.INVISIBLE);
         }
     }
+
+//    public void showRewardAdder(double reward){
+//        long timeInMilliseconds= 2000; //2sec
+//        long timeDivisions=50;
+//        long tickTime = (timeInMilliseconds/timeDivisions);
+//
+//        CountDownTimer countDownTimer = new CountDownTimer(timeInMilliseconds, tickTime) {
+//            @Override
+//            public void onTick(long l) {
+//                updateTimerColor((int) l / 1000);
+//                quizContractView.changeTimerText("" + (int) l / 1000);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                timerRunning = false;
+//                if (!quizContractView.isQuestionAnswered()) {
+//                    quizContractView.setAnswerVisibility(true);
+//                    quizContractView.setNextButtonVisibility(true);
+//                    quizContractView.updateAnswerText("Time has run out :(");
+//                    quizContractView.updateAnswerColor(Color.RED);
+//                    quizContractView.setConfirmButtonVisibility(false);
+//                } else {
+//                    quizContractView.changeTimerText("End");
+//                }
+//            }
+//        }.start();
+//
+//    }
 
 
 }

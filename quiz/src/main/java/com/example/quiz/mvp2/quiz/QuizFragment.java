@@ -39,6 +39,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     TextView wheelScoreText;
     TextView quizScoreText;
     TextView totalScoreText;
+    private TextView countDownText;
 
 
     Question currQuestion;
@@ -70,6 +71,8 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         wheelScoreText = (TextView) view.findViewById(R.id.wheelScore);
         quizScoreText = (TextView) view.findViewById(R.id.quizScore);
         totalScoreText = (TextView) view.findViewById(R.id.totalReward);
+        countDownText = (TextView) view.findViewById(R.id.timerText);
+
 
 
             myActivity= (MainActivity) getActivity();
@@ -187,6 +190,24 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
+    public void changeTimerText(String text) {
+        countDownText.setText(text);
+    }
+
+    @Override
+    public void setTimerTextColor(int color) {
+        countDownText.setTextColor(color);
+    }
+
+    @Override
+    public boolean isQuestionAnswered() {
+        if(confirmButton.getVisibility()==View.VISIBLE){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public void setNextButtonVisibility(boolean visibility) {
         if(visibility){
             nextQuestionButton.setVisibility(View.VISIBLE);
@@ -237,6 +258,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     public void updateQuestionText(String text) {
         question.setText(text);
     }
+
 
 
 }

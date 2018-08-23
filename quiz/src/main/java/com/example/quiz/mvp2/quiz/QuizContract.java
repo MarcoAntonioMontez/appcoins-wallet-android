@@ -21,11 +21,16 @@ public interface QuizContract {
         public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
         public void setEndScreenTextVisibility(boolean visibility);
         public void setConfirmButtonVisibility(boolean visibility);
+        public void changeTimerText(String text);
+        public void setTimerTextColor(int color);
+
+        public boolean isQuestionAnswered();
     }
 
     interface Presenter extends BasePresenter {
         public void changeFragment();
         public Question loadNextQuestion();
         public void loadAnswerTextNButtons(String chosenOption);
+        public void startTimer();
     }
 }

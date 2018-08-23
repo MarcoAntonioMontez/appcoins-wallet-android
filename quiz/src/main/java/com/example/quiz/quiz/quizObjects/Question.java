@@ -22,7 +22,7 @@ public class Question {
 
     private boolean checkInitialParameters(){
         //Checks if answer and questionsList!=NULL
-        //checks if answer is in questionsList
+        //checks if answer is in questionsLista
         return true;
     }
 
