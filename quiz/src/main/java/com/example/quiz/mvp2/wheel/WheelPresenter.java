@@ -40,7 +40,7 @@ public class WheelPresenter implements WheelContract.Presenter {
     public void loadRewardText() {
         double reward=MathUtilsFunc.truncatedRandomDouble();
         rewardSaver.setReward(reward);
-        String str = "Congratulations you won " + reward +" Appc!";
+        String str = "Congratulations you won ";
         wheelContractView.setRewardText(str);
         wheelContractView.setRewardTextVisibility(true);
         wheelContractView.setNextFragButtonVisibility(true);

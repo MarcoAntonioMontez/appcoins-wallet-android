@@ -96,7 +96,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
                 }
 
                 if (checkedButton != null) {
-                    mPresenter.loadAnswerTextNButtons(checkedButton.getText().toString());
+                    mPresenter.loadAnswerTextNButtons(checkedButton);
                 }
                 }
             });
@@ -257,8 +257,47 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     @Override
     public void updateQuestionText(String text) {
         question.setText(text);
+
     }
 
+    @Override
+    public RadioButton getButtonFromText(String text) {
+        if (option_1.getText().toString().equals(text)) {
+            return option_1;
+        } else if (option_2.getText().toString().equals(text)) {
+            return option_2;
+        } else if (option_3.getText().toString().equals(text)) {
+            return option_3;
+        } else if (option_4.getText().toString().equals(text)) {
+            return option_4;
+        }
+        return null;
+    }
+
+    public void resetOptionColors(){
+        option_1.setTextColor(Color.GRAY);
+        option_2.setTextColor(Color.GRAY);
+        option_3.setTextColor(Color.GRAY);
+        option_4.setTextColor(Color.GRAY);
+    }
+
+    public void paintCorrectAnswer(RadioButton radioButton){
+        radioButton.setTextColor(Color.rgb(18,173,42));
+    }
+
+    public void paintWrongAnswer(RadioButton radioButton){
+        radioButton.setTextColor(Color.RED);
+    }
+
+    @Override
+    public void updateWrongAnswerColors(RadioButton wrongButton, RadioButton rightButton){
+        paintCorrectAnswer(rightButton);
+        paintWrongAnswer(wrongButton);
+    }
+
+    public void updateRightAnswerColors(RadioButton rightButton){
+        paintCorrectAnswer(rightButton);
+    }
 
 
 }

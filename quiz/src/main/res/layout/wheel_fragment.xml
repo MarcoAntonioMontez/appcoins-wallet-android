@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="51dp"
-        android:text="Timer"
+        android:text=""
         android:textSize="30sp"
         android:textColor="@android:color/holo_green_light" />
 

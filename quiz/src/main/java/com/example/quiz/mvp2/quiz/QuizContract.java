@@ -1,5 +1,7 @@
 package com.example.quiz.mvp2.quiz;
 
+import android.widget.RadioButton;
+
 import com.example.quiz.mvp2.BasePresenter;
 import com.example.quiz.mvp2.BaseView;
 import com.example.quiz.quiz.quizObjects.Question;
@@ -23,14 +25,18 @@ public interface QuizContract {
         public void setConfirmButtonVisibility(boolean visibility);
         public void changeTimerText(String text);
         public void setTimerTextColor(int color);
-
         public boolean isQuestionAnswered();
+
+        public RadioButton getButtonFromText(String text);
+        public void updateWrongAnswerColors(RadioButton wrongButton, RadioButton rightButton);
+        public void resetOptionColors();
+        public void updateRightAnswerColors(RadioButton rightButton);
     }
 
     interface Presenter extends BasePresenter {
         public void changeFragment();
         public Question loadNextQuestion();
-        public void loadAnswerTextNButtons(String chosenOption);
+        public void loadAnswerTextNButtons(RadioButton chosenButton);
         public void startTimer();
     }
 }

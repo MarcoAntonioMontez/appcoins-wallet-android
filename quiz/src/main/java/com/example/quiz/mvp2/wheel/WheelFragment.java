@@ -33,7 +33,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     Context context;
     TextView timerText;
 
-    long timeInMilliseconds= 2000; //milisec
+    long timeInMilliseconds= 1500; //milisec
     final long timeDivisions=50;
     long tickTime = (timeInMilliseconds/timeDivisions);
 
@@ -147,12 +147,12 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
             @Override
             public void onTick(long l) {
                 currentReward=currentReward+(newReward/(double)timeDivisions);
-                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward));
+                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward) + " Apc");
             }
 
             @Override
             public void onFinish() {
-                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(reward));
+                timerText.setText("" + MathUtilsFunc.roundTwoDecimals(reward) + " Apc");
             }
         }.start();
 
