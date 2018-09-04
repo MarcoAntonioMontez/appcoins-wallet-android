@@ -9,7 +9,7 @@ public class MathUtilsFunc {
         public static double truncatedRandomDouble(){
             double number;
             Random random = new Random();
-            number = random.nextDouble();
+            number = (random.nextDouble() + 0.4) * (1.0/1.4);
             number=roundTwoDecimals(number);
             return number;
         }

@@ -12,8 +12,9 @@ public interface WheelContract {
 
     interface View extends BaseView<Presenter> {
         void setRewardText(String Text);
+        void showCoinsNText();
+        void fadeOut();
         void onClickNextButton();
-        void setNextFragButtonVisibility(boolean visibility);
         void onClickWheelButton();
         void animateWheel();
         void setRewardTextVisibility(boolean visibility);

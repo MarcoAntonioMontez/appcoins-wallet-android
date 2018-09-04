@@ -30,7 +30,6 @@ public class WheelPresenter implements WheelContract.Presenter {
     @Override
     public void runWheel() {
         if(firstWheelRun){
-            wheelContractView.setRewardTextVisibility(false);
             wheelContractView.animateWheel();
             firstWheelRun=false;
         }
@@ -40,12 +39,8 @@ public class WheelPresenter implements WheelContract.Presenter {
     public void loadRewardText() {
         double reward=MathUtilsFunc.truncatedRandomDouble();
         rewardSaver.setReward(reward);
-        String str = "Congratulations you won ";
-        wheelContractView.setRewardText(str);
-        wheelContractView.setRewardTextVisibility(true);
-        wheelContractView.setNextFragButtonVisibility(true);
 
-        wheelContractView.showRewardAdder(reward, wheelContractView.getTextView("timerText"));
+        wheelContractView.showRewardAdder(reward, wheelContractView.getTextView("coinsText"));
     }
 
     @Override

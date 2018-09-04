@@ -48,7 +48,7 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     }
 
     public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.v1_wheel_fragment, container, false);
+        View view = inflater.inflate(R.layout.wheel_fragment, container, false);
 
         rewardText=(TextView) view.findViewById(R.id.reward_text);
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
@@ -111,19 +111,29 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
     }
 
     @Override
+    public void showCoinsNText() {
+
+    }
+
+    @Override
+    public void fadeOut() {
+
+    }
+
+    @Override
     public void onClickNextButton() {
         mPresenter.changeFragment();
     }
 
 
-    @Override
-    public void setNextFragButtonVisibility(boolean visibility) {
-        if(visibility){
-            buttonNext.setVisibility(View.VISIBLE);
-        }  else{
-            buttonNext.setVisibility(View.INVISIBLE);
-        }
-    }
+//    @Override
+//    public void setNextFragButtonVisibility(boolean visibility) {
+//        if(visibility){
+//            buttonNext.setVisibility(View.VISIBLE);
+//        }  else{
+//            buttonNext.setVisibility(View.INVISIBLE);
+//        }
+//    }
 
 
     @Override

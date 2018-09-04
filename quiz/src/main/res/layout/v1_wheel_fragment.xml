@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +18,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/ic_group">
-
     </LinearLayout>
 
     <ImageView
@@ -42,8 +47,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_above="@id/wheel_img_temp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:textSize="20sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
@@ -52,67 +58,108 @@
         android:lineSpacingExtra="4sp"
         android:text="Test your luck and spin the wheel to get some AppCoins"
         />
+    <!--
+        <ImageView
+            android:id="@+id/wheel_img_temp"
+            android:layout_width="283dp"
+            android:layout_height="275dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/lucky_wheel" />
+    -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_view"
+            android:layout_width="337dp"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp" />
+
+        <Button
+            android:id="@+id/play_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="172dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="70dp"
+            android:paddingEnd="@dimen/half_large_margin"
+            android:paddingStart="@dimen/half_large_margin"
+            android:text="Play"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="29dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Current Prize:"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/cur_prize_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/appc_logo"
+            android:fontFamily="sans-serif"
+            android:text="0 APPC"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/appc_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginRight="20dp"
+            app:srcCompat="@drawable/ic_primary_logo"
+            />
+
+    </RelativeLayout>
 
     <ImageView
-        android:id="@+id/wheel_img_temp"
-        android:layout_width="283dp"
-        android:layout_height="275dp"
-        android:layout_centerInParent="true"
-        app:srcCompat="@drawable/lucky_wheel" />
+        android:id="@+id/gray_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EE000000"
+        android:visibility="invisible"
+        >
+        </ImageView>
 
-    <Button
-        android:id="@+id/action_air_drop"
-        style="@style/ButtonStyle"
-        android:layout_width="172dp"
-        android:layout_height="@dimen/button_height"
-        android:layout_alignParentBottom="true"
+    <TextView
+        android:id="@+id/coins_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
-        android:paddingEnd="@dimen/half_large_margin"
-        android:paddingStart="@dimen/half_large_margin"
-        android:text="Play"
-        android:textAllCaps="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="29dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Current Prize:"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:id="@+id/cur_prize_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@+id/appc_logo"
+        android:layout_below="@+id/coins"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
-        android:text="2 APPC"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:text="+0 APPC"
+        android:textColor="#f5c406"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:visibility="invisible" />
 
     <ImageView
-        android:id="@+id/appc_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="11dp"
-        android:layout_marginRight="20dp"
-        app:srcCompat="@drawable/ic_primary_logo"
-        />
-
-
+        android:id="@+id/coins"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="142dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_coins" />
 
 
 </RelativeLayout>
