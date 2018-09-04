@@ -2,6 +2,7 @@ package com.example.quiz.mvp2.wheel;
 
 
 import android.support.v4.app.FragmentActivity;
+import android.widget.TextView;
 
 import com.example.quiz.mvp2.BasePresenter;
 import com.example.quiz.mvp2.BaseView;
@@ -16,7 +17,9 @@ public interface WheelContract {
         void onClickWheelButton();
         void animateWheel();
         void setRewardTextVisibility(boolean visibility);
-        public void showRewardAdder(double reward);
+        public void showRewardAdder(double reward, TextView textView);
+        public void setRewardWalletVisibility(boolean visibility);
+        public TextView getTextView(String text);
 
     }
 

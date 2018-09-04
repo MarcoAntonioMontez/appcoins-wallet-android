@@ -45,7 +45,7 @@ public class WheelPresenter implements WheelContract.Presenter {
         wheelContractView.setRewardTextVisibility(true);
         wheelContractView.setNextFragButtonVisibility(true);
 
-        wheelContractView.showRewardAdder(reward);
+        wheelContractView.showRewardAdder(reward, wheelContractView.getTextView("timerText"));
     }
 
     @Override

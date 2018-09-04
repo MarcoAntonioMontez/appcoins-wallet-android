@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.quiz.R;
 import com.example.quiz.mvp2.quiz.QuizFragment;
 import com.example.quiz.mvp2.quiz.QuizPresenter;
+import com.example.quiz.mvp2.wheel.Dummy_fragment;
 import com.example.quiz.mvp2.wheel.WheelContract;
 import com.example.quiz.mvp2.wheel.WheelFragment;
 import com.example.quiz.mvp2.wheel.WheelPresenter;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
             }
 
             // Create a new Fragment to be placed in the activity layout
-            WheelFragment firstFragment = new WheelFragment();
+            //WheelFragment firstFragment = new WheelFragment();
+            Dummy_fragment firstFragment = new Dummy_fragment();
 
             // In case this activity was started with special instructions from an
             // Intent, pass the Intent's extras to the fragment as arguments
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
                     .add(R.id.fragment_container, firstFragment).commit();
 
             //Create the Presenter
-            mPresenter = new WheelPresenter(firstFragment,this,rewardSaver);
+            //mPresenter = new WheelPresenter(firstFragment,this,rewardSaver);
         }
 
     }
