@@ -2,8 +2,10 @@ package com.example.quiz.mvp2.quiz;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.quiz.R;
 import com.example.quiz.mvp2.MainActivity;
 import com.example.quiz.quiz.quizObjects.Question;
 import com.example.quiz.quiz.quizObjects.RewardSaver;
+import com.example.quiz.util.MathUtilsFunc;
 
 import org.w3c.dom.Text;
 
@@ -52,6 +55,12 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     private TextView quizBtnText3;
     private TextView quizBtnText4;
 
+    //RewardAdder
+    long timeInMilliseconds= 1000; //milisec
+    final long timeDivisions=50;
+    long tickTime = (timeInMilliseconds/timeDivisions);
+    double currentReward;
+
 
     @Override
     public void setPresenter(QuizContract.Presenter presenter) {
@@ -63,7 +72,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         View view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
         question = (TextView) view.findViewById(R.id.question_text_quiz);
-        totalScoreText = (TextView) view.findViewById(R.id.totalReward);
+        totalScoreText = (TextView) view.findViewById(R.id.cur_prize_text);
         countDownText = (TextView) view.findViewById(R.id.timerText);
         quizBtn1 = (RelativeLayout) view.findViewById(R.id.quiz_btn_1);
         quizBtn2 = (RelativeLayout) view.findViewById(R.id.quiz_btn_2);
@@ -77,6 +86,8 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
+
+        currentReward=rewardSaver.getTotalScore();
 
 
         mPresenter.loadNextQuestion();
@@ -159,17 +170,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         quizBtnText4.setText(optionsList.get(3));
     }
 
-    @Override
-    public void updateAnswerText(String text) {
-
-        updateText(text_result, text);
-        text_result.setTextColor(Color.GREEN);
-    }
-
-    public void updateAnswerColor(int textColor){
-        text_result.setTextColor(textColor);
-    }
-
 
     @Override
     public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText) {
@@ -201,14 +201,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         countDownText.setTextColor(color);
     }
 
-    @Override
-    public void setQuestionVisibility(boolean visibility) {
-        if(visibility){
-            question.setVisibility(View.VISIBLE);
-        }else{
-            question.setVisibility(View.INVISIBLE);
-        }
-    }
 
     @Override
     public void onClickNextFragButton() {
@@ -248,23 +240,71 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     public void paintCorrectAnswer(RelativeLayout layout){
-        layout.setBackgroundColor(Color.rgb(18,173,42));
+        layout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_answer));
 
     }
 
     public void paintWrongAnswer(RelativeLayout layout){
-        layout.setBackgroundColor(Color.RED);
+        layout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_answer));
     }
 
     @Override
     public void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton){
+        updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
         paintWrongAnswer(wrongButton);
     }
 
     public void updateRightAnswerColors(RelativeLayout rightButton){
+        updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
     }
 
+    public void setRewardText(String text){
+        totalScoreText.setText(text);
+    }
+
+    public void showRewardAdder(final double reward, final TextView textview){
+
+
+        CountDownTimer countDownTimer = new CountDownTimer(timeInMilliseconds, tickTime) {
+            @Override
+            public void onTick(long l) {
+                currentReward=currentReward+(reward/(double)timeDivisions);
+                textview.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC" );
+            }
+
+            @Override
+            public void onFinish() {
+                currentReward=rewardSaver.getTotalScore();
+                String endReward="" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC";
+                textview.setText(endReward);
+            }
+        }.start();
+    }
+
+    public TextView getTextView(String text){
+        if(text.equals("totalScoreText")){
+            return totalScoreText;
+        } else if (text.equals("coinsText")){
+            return null;
+        }
+        return null;
+    }
+
+    public void updateButtonsColorWhenAnswered(){
+        quizBtn1.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
+        quizBtn2.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
+        quizBtn3.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
+        quizBtn4.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
+
+    }
+
+    public void resetButtonsColor(){
+        quizBtn1.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
+        quizBtn2.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
+        quizBtn3.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
+        quizBtn4.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
+    }
 
 }

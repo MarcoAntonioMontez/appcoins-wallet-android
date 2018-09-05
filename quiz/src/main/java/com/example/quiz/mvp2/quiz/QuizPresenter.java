@@ -2,6 +2,7 @@ package com.example.quiz.mvp2.quiz;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
@@ -26,6 +27,10 @@ public class QuizPresenter  implements QuizContract.Presenter {
     private long timeLeftInMilliseconds = 20000; // 20 seg
     private boolean timerRunning=true;
     private boolean isQuestionAnswered=false;
+    final Handler handler= new Handler();
+
+    double fixedQuizReward=0.3;
+    int quizBufferTime=5000;
 
 
     @Override
@@ -35,6 +40,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
     @Override
     public Question loadNextQuestion() {
+        quizContractView.resetButtonsColor();
+        quizContractView.setRewardText("" + rewardSaver.getTotalScore() + " APPC");
         isQuestionAnswered=false;
         firstAnswerAttempt=true;
         if(!questionsList.isEmpty()){
@@ -43,10 +50,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
             quizContractView.resetOptionColors();
             quizContractView.updateQuestionTextAndOptions(currQuestion);
         }else{
-            quizContractView.hideAll();
-
+            //quizContractView.hideAll();
             //setEndScreenText();
-
             currQuestion=null;
         }
         return currQuestion;
@@ -74,6 +79,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
                     quizContractView.updateRightAnswerColors(chosenButton);
                     score++;
                     isQuestionAnswered=true;
+                    rewardSaver.addReward(fixedQuizReward);
+                    quizContractView.showRewardAdder(fixedQuizReward, quizContractView.getTextView("totalScoreText"));
 
                 }else {
                     RelativeLayout rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
@@ -81,9 +88,20 @@ public class QuizPresenter  implements QuizContract.Presenter {
                     isQuestionAnswered=true;
                 }
                 cancelTimer();
+                loadNextQuestionAfterTime(quizBufferTime);
+                //Put animation, timer, change screen here
             }
         }
 
+    }
+
+    public void loadNextQuestionAfterTime(int time){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadNextQuestion();
+            }
+        }, time);
     }
 
     @Override

@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/ic_group">
@@ -45,6 +45,7 @@
         android:textStyle="normal" />
 
     <TextView
+        android:id="@+id/wheel_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -68,11 +69,11 @@
     -->
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lottie_view"
+            android:layout_below="@+id/wheel_text"
             android:layout_width="337dp"
             android:layout_height="300dp"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="120dp" />
+            android:layout_marginTop="70dp" />
 
         <Button
             android:id="@+id/play_btn"
@@ -155,9 +156,8 @@
         android:id="@+id/coins"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
+        android:layout_centerVertical="true"
         android:visibility="invisible"
         app:srcCompat="@drawable/ic_coins" />
 

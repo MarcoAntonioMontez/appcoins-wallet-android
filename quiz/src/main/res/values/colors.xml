@@ -3,6 +3,16 @@
     <color name="lightGreen">#90EE90</color>
     <color name="oliveDrab">#6B8E23</color>
 
+    <color name="lightShadow">#14000000</color>
+    <color name="Shadow">#23000000</color>
+
+    <color name="gray_answer">#407a7a7a</color>
+    <color name="green_answer">#d033b293</color>
+    <color name="red_answer">#d0c31a1a</color>
+    <color name="white_answer">#d0FFFFFF</color>
+
+
+
     <color name="green">#4caf50</color>
     <color name="red">#d32f2f</color>
     <color name="orange">#ef6c00</color>

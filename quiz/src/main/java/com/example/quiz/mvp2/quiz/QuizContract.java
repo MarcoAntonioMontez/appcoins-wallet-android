@@ -2,6 +2,7 @@ package com.example.quiz.mvp2.quiz;
 
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.quiz.mvp2.BasePresenter;
 import com.example.quiz.mvp2.BaseView;
@@ -9,31 +10,32 @@ import com.example.quiz.quiz.quizObjects.Question;
 
 public interface QuizContract {
     interface View extends BaseView<Presenter> {
-        public void onClickNextFragButton();
-        public void onClickNextQuestionButton();
-        public void updateQuestionTextAndOptions(Question question);
-        public void updateQuestionText(String text);
-        public void updateAnswerText(String text);
-        public void updateAnswerColor(int textColor);
-        public void setQuestionVisibility(boolean visibility);
-        public void hideAll();
-        public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
-        public void setEndScreenTextVisibility(boolean visibility);
-        public void changeTimerText(String text);
-        public void setTimerTextColor(int color);
-        public String getButtonText(RelativeLayout button);
+        void onClickNextFragButton();
+        void onClickNextQuestionButton();
+        void updateQuestionTextAndOptions(Question question);
+        void updateQuestionText(String text);
+        void hideAll();
+        void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
+        void setEndScreenTextVisibility(boolean visibility);
+        void changeTimerText(String text);
+        void setTimerTextColor(int color);
+        String getButtonText(RelativeLayout button);
 
-        public RelativeLayout getButtonFromText(String text);
-        public void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton);
-        public void resetOptionColors();
-        public void updateRightAnswerColors(RelativeLayout rightButton);
+        RelativeLayout getButtonFromText(String text);
+        void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton);
+        void resetOptionColors();
+        void updateRightAnswerColors(RelativeLayout rightButton);
+        void setRewardText(String text);
+        public void showRewardAdder(final double reward, final TextView textview);
+        public TextView getTextView(String text);
+        public void resetButtonsColor();
     }
 
     interface Presenter extends BasePresenter {
-        public void changeFragment();
-        public Question loadNextQuestion();
-        public void loadAnswer(RelativeLayout relativeLayout);
-        public void startTimer();
-        public boolean isQuestionAnswered();
+        void changeFragment();
+        Question loadNextQuestion();
+        void loadAnswer(RelativeLayout relativeLayout);
+        void startTimer();
+        boolean isQuestionAnswered();
     }
 }

@@ -62,7 +62,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
         rewardText=(TextView) view.findViewById(R.id.cur_prize_text);
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
         prevBtn = (ImageView) view.findViewById(R.id.left_arrow);
-        animationView.setAnimation("wheel.json");
+        animationView.setAnimation("final_wheel.json");
         timerText = (TextView) view.findViewById(R.id.wheel_timer_text);
         rewardWallet=(TextView) view.findViewById(R.id.reward_wallet);
         playBtn = (Button) view.findViewById(R.id.play_btn);
@@ -147,7 +147,6 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     }
 
     public void runWheelAnimation(LottieAnimationView animationView){
-        animationView.setRepeatCount(1);
         animationView.playAnimation();
     }
 
@@ -213,7 +212,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
             @Override
             public void onTick(long l) {
                 currentReward=currentReward+(newReward/(double)timeDivisions);
-                textview.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC" );
+                textview.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC");
             }
 
             @Override
