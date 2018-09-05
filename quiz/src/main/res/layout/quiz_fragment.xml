@@ -6,75 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/title_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="QuizFragment"
-        android:textSize="30sp" />
+        android:background="@drawable/ic_group">
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/optionGroup"
-        android:layout_centerHorizontal="true"
-        android:text="Incorrect Answer"
-        android:textSize="24sp"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/confirm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/optionGroup"
-        android:layout_centerHorizontal="true"
-        android:text="Choose" />
-
-    <TextView
-        android:id="@+id/question_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/left_arrow_quiz"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:paddingLeft="20dp"
-        android:text="This is a really really really long text, so long in fact that i want and i really want to keep it centered"
-        android:textSize="24sp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
     <TextView
-        android:id="@+id/wheelScore"
-        android:layout_below="@+id/question_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="sans-serif"
+        android:gravity="end"
+        android:text="Quiz Challenge"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/question_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/left_arrow_quiz"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.17"
+        android:lineSpacingExtra="20sp"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:text="Question     01     02     03" />
+
+    <TextView
+        android:id="@+id/question_text_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Wheel: 0.5 Apc"
-        android:textSize="24sp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:textColor="@android:color/holo_green_dark"
-        android:visibility="invisible"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#ffffff"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        android:text="What is the name of the famous Bitcoin exchange from japan  that collapsed in 2014?"
+        />
 
-    <TextView
-        android:id="@+id/quizScore"
-        android:layout_below="@+id/wheelScore"
-        android:layout_marginTop="160dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Quiz Score: 3 (X)"
-        android:textSize="24sp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:textColor="@android:color/holo_green_light"
-        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/totalReward"
@@ -93,105 +87,191 @@
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible" />
 
-
-
-
-    <RadioGroup
-        android:id="@+id/optionGroup"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/question_text"
-        android:layout_marginTop="80dp"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:visibility="visible">
+        android:layout_height="280dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/question_text_quiz"
+        android:background="@drawable/rectangle">
 
-
-        <RadioButton
-            android:id="@+id/option1_quiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <View
+            android:id="@+id/line_1_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
             android:layout_alignParentTop="true"
-            android:layout_below="@+id/question_text"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Option 1"
-            android:textSize="24sp" />
+            android:layout_marginTop="65dp"
+            android:background="@drawable/line"
+            android:visibility="visible"/>
+        <View
+            android:id="@+id/line_2_quiz"
+            android:layout_below="@+id/line_1_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/line"
+            android:visibility="visible"/>
+
+        <View
+            android:id="@+id/line_3_quiz"
+            android:layout_below="@+id/line_2_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="65dp"
+            android:background="@drawable/line"
+            android:visibility="visible"/>
+
+        <RelativeLayout
+            android:id="@+id/quiz_btn_1"
+            android:layout_above="@+id/quiz_btn_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/quiz_btn_text_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2sp"
+                android:gravity="center_horizontal"
+                android:text="_Blockchain.info"
+                />
+        </RelativeLayout>
 
 
-        <RadioButton
-            android:id="@+id/option2_quiz"
+        <RelativeLayout
+            android:id="@+id/quiz_btn_2"
+            android:layout_below="@+id/line_1_quiz"
+            android:layout_above="@+id/quiz_btn_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/quiz_btn_text_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_below="@+id/option1_quiz"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Option 2"
-            android:textSize="24sp" />
-
-        <RadioButton
-            android:id="@+id/option3_quiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_below="@+id/option2_quiz"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Option 3"
-            android:textSize="24sp" />
-
-        <RadioButton
-            android:id="@+id/option4_quiz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/option3_quiz"
-            android:layout_centerHorizontal="true"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="Option 4"
-            android:textSize="24sp"
-            tools:ignore="ObsoleteLayoutParam" />
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:gravity="center_horizontal"
+            android:text="_Tradehill"
+            />
+    </RelativeLayout>
 
 
-    </RadioGroup>
+        <RelativeLayout
+            android:id="@+id/quiz_btn_3"
+            android:layout_below="@+id/line_2_quiz"
+            android:layout_above="@+id/quiz_btn_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/quiz_btn_text_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2sp"
+                android:gravity="center_horizontal"
+                android:text="_MT. Gox"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/quiz_btn_4"
+            android:layout_below="@+id/line_3_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/quiz_btn_text_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="#000000"
+                android:lineSpacingExtra="2sp"
+                android:gravity="center_horizontal"
+                android:text="_Bitstamp"
+                />
+        </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/next_frag_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
-        android:text="Wheel"
-        android:visibility="invisible" />
 
-    <ImageView
-        android:id="@+id/next_arrow_quiz"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/arrow_forward"
-        android:visibility="invisible"/>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/timerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/next_frag_btn"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/question_text_quiz"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:text="20"
         android:textColor="@android:color/holo_green_light"
-        android:textSize="40sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="29dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Current Prize:"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/cur_prize_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/appc_logo"
+        android:fontFamily="sans-serif"
+        android:text="0 APPC"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/appc_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="11dp"
+        android:layout_marginRight="20dp"
+        app:srcCompat="@drawable/ic_primary_logo"
+        />
 
 
 </RelativeLayout>

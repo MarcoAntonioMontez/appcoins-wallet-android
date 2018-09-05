@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.quiz.R;
@@ -26,15 +28,8 @@ import java.util.LinkedList;
 
 public class QuizFragment extends Fragment implements QuizContract.View{
     LottieAnimationView animationView;
-    Button confirmButton;
     ImageView nextQuestionButton;
-    Button changeFragBtn;
     TextView question;
-    RadioButton option_1;
-    RadioButton option_2;
-    RadioButton option_3;
-    RadioButton option_4;
-    RadioGroup radioGroup;
     TextView text_result;
     TextView wheelScoreText;
     TextView quizScoreText;
@@ -48,6 +43,15 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     private QuizContract.Presenter mPresenter;
     private MainActivity myActivity;
     private RewardSaver rewardSaver;
+    private RelativeLayout quizBtn1;
+    private RelativeLayout quizBtn2;
+    private RelativeLayout quizBtn3;
+    private RelativeLayout quizBtn4;
+    private TextView quizBtnText1;
+    private TextView quizBtnText2;
+    private TextView quizBtnText3;
+    private TextView quizBtnText4;
+
 
     @Override
     public void setPresenter(QuizContract.Presenter presenter) {
@@ -58,77 +62,86 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.quiz_fragment, container, false);
 
-        confirmButton = (Button) view.findViewById(R.id.confirm_button);
-        nextQuestionButton = (ImageView) view.findViewById(R.id.next_arrow_quiz);
-        changeFragBtn = (Button) view.findViewById(R.id.next_frag_btn);
-        question = (TextView) view.findViewById(R.id.question_text);
-        option_1 = (RadioButton) view.findViewById(R.id.option1_quiz);
-        option_2 = (RadioButton) view.findViewById(R.id.option2_quiz);
-        option_3 = (RadioButton) view.findViewById(R.id.option3_quiz);
-        option_4 = (RadioButton) view.findViewById(R.id.option4_quiz);
-        text_result = (TextView) view.findViewById(R.id.text_result);
-        radioGroup = (RadioGroup) view.findViewById(R.id.optionGroup);
-        wheelScoreText = (TextView) view.findViewById(R.id.wheelScore);
-        quizScoreText = (TextView) view.findViewById(R.id.quizScore);
+        question = (TextView) view.findViewById(R.id.question_text_quiz);
         totalScoreText = (TextView) view.findViewById(R.id.totalReward);
         countDownText = (TextView) view.findViewById(R.id.timerText);
+        quizBtn1 = (RelativeLayout) view.findViewById(R.id.quiz_btn_1);
+        quizBtn2 = (RelativeLayout) view.findViewById(R.id.quiz_btn_2);
+        quizBtn3 = (RelativeLayout) view.findViewById(R.id.quiz_btn_3);
+        quizBtn4 = (RelativeLayout) view.findViewById(R.id.quiz_btn_4);
 
+        quizBtnText1 = (TextView) view.findViewById(R.id.quiz_btn_text_1);
+        quizBtnText2 = (TextView) view.findViewById(R.id.quiz_btn_text_2);
+        quizBtnText3 = (TextView) view.findViewById(R.id.quiz_btn_text_3);
+        quizBtnText4 = (TextView) view.findViewById(R.id.quiz_btn_text_4);
 
-
-            myActivity= (MainActivity) getActivity();
+        myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
 
 
-            mPresenter.loadNextQuestion();
+        mPresenter.loadNextQuestion();
 
+        quizBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadAnswer(quizBtn1);
+            }
+        });
 
-            confirmButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                RadioButton checkedButton = null;
-                if (option_1.isChecked()) {
-                    checkedButton = option_1;
-                } else if (option_2.isChecked()) {
-                    checkedButton = option_2;
-                } else if (option_3.isChecked()) {
-                    checkedButton = option_3;
-                } else if (option_4.isChecked()) {
-                    checkedButton = option_4;
-                }
+        quizBtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadAnswer(quizBtn2);
 
-                if (checkedButton != null) {
-                    mPresenter.loadAnswerTextNButtons(checkedButton);
-                }
-                }
-            });
+            }
+        });
 
-            nextQuestionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickNextQuestionButton();
-                }
-            });
+        quizBtn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadAnswer(quizBtn3);
 
-            changeFragBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onClickNextFragButton();
-                }
-            });
+            }
+        });
 
+        quizBtn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadAnswer(quizBtn4);
 
+            }
+        });
 
         return view;
     }
 
+    @Override
+    public String getButtonText(RelativeLayout button){
+        TextView textView=null;
+        String text="Button not Found";
+        if(button==quizBtn1){
+             textView=quizBtnText1;
+        } else if(button==quizBtn2) {
+            textView=quizBtnText2;
+        } else if(button==quizBtn3) {
+            textView=quizBtnText3;
+        } else if(button==quizBtn4) {
+            textView=quizBtnText4;
+        }
+        if(textView!=null){
+            text=textView.getText().toString();
+        }
+
+        return text;
+    }
+
     public void hideAll() {
-        confirmButton.setVisibility(View.INVISIBLE);
         nextQuestionButton.setVisibility(View.INVISIBLE);
         question.setVisibility(View.INVISIBLE);
-        option_1.setVisibility(View.INVISIBLE);
-        option_2.setVisibility(View.INVISIBLE);
-        option_3.setVisibility(View.INVISIBLE);
-        option_4.setVisibility(View.INVISIBLE);
-        radioGroup.setVisibility(View.INVISIBLE);
+        quizBtn1.setVisibility(View.INVISIBLE);
+        quizBtn2.setVisibility(View.INVISIBLE);
+        quizBtn3.setVisibility(View.INVISIBLE);
+        quizBtn4.setVisibility(View.INVISIBLE);
         text_result.setVisibility(View.INVISIBLE);
 
     }
@@ -140,10 +153,10 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         LinkedList<String> optionsList = newQuestion.getOptionsList();
         question.setText(newQuestion.getQuestion());
 
-        option_1.setText(optionsList.get(0));
-        option_2.setText(optionsList.get(1));
-        option_3.setText(optionsList.get(2));
-        option_4.setText(optionsList.get(3));
+        quizBtnText1.setText(optionsList.get(0));
+        quizBtnText2.setText(optionsList.get(1));
+        quizBtnText3.setText(optionsList.get(2));
+        quizBtnText4.setText(optionsList.get(3));
     }
 
     @Override
@@ -157,9 +170,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         text_result.setTextColor(textColor);
     }
 
-    public void initRadioGroup(){
-        radioGroup.clearCheck();
-    }
 
     @Override
     public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText) {
@@ -180,14 +190,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         }
     }
 
-    @Override
-    public void setConfirmButtonVisibility(boolean visibility) {
-        if(visibility){
-            confirmButton.setVisibility(View.VISIBLE);
-        }else{
-            confirmButton.setVisibility(View.INVISIBLE);
-        }
-    }
 
     @Override
     public void changeTimerText(String text) {
@@ -197,42 +199,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     @Override
     public void setTimerTextColor(int color) {
         countDownText.setTextColor(color);
-    }
-
-    @Override
-    public boolean isQuestionAnswered() {
-        if(confirmButton.getVisibility()==View.VISIBLE){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void setNextButtonVisibility(boolean visibility) {
-        if(visibility){
-            nextQuestionButton.setVisibility(View.VISIBLE);
-        }else{
-            nextQuestionButton.setVisibility(View.INVISIBLE);
-        }
-
-    }
-
-    @Override
-    public void setChangeFragButtonVisibility(boolean visibility) {
-        if(visibility){
-            changeFragBtn.setVisibility(View.VISIBLE);
-        }else{
-            changeFragBtn.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    @Override
-    public void setAnswerVisibility(boolean visibility) {
-        if(visibility){
-            text_result.setVisibility(View.VISIBLE);
-        }else{
-            text_result.setVisibility(View.INVISIBLE);
-        }
     }
 
     @Override
@@ -261,41 +227,42 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
-    public RadioButton getButtonFromText(String text) {
-        if (option_1.getText().toString().equals(text)) {
-            return option_1;
-        } else if (option_2.getText().toString().equals(text)) {
-            return option_2;
-        } else if (option_3.getText().toString().equals(text)) {
-            return option_3;
-        } else if (option_4.getText().toString().equals(text)) {
-            return option_4;
+    public RelativeLayout getButtonFromText(String text) {
+        if (getButtonText(quizBtn1).equals(text)) {
+            return quizBtn1;
+        } else if (getButtonText(quizBtn2).equals(text)) {
+            return quizBtn2;
+        } else if (getButtonText(quizBtn3).equals(text)) {
+            return quizBtn3;
+        } else if (getButtonText(quizBtn4).equals(text)) {
+            return quizBtn4;
         }
         return null;
     }
 
     public void resetOptionColors(){
-        option_1.setTextColor(Color.GRAY);
-        option_2.setTextColor(Color.GRAY);
-        option_3.setTextColor(Color.GRAY);
-        option_4.setTextColor(Color.GRAY);
+//        quizBtn1.setBackgroundColor(Color.WHITE);
+//        quizBtn2.setBackgroundColor(Color.WHITE);
+//        quizBtn3.setBackgroundColor(Color.WHITE);
+//        quizBtn4.setBackgroundColor(Color.WHITE);
     }
 
-    public void paintCorrectAnswer(RadioButton radioButton){
-        radioButton.setTextColor(Color.rgb(18,173,42));
+    public void paintCorrectAnswer(RelativeLayout layout){
+        layout.setBackgroundColor(Color.rgb(18,173,42));
+
     }
 
-    public void paintWrongAnswer(RadioButton radioButton){
-        radioButton.setTextColor(Color.RED);
+    public void paintWrongAnswer(RelativeLayout layout){
+        layout.setBackgroundColor(Color.RED);
     }
 
     @Override
-    public void updateWrongAnswerColors(RadioButton wrongButton, RadioButton rightButton){
+    public void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton){
         paintCorrectAnswer(rightButton);
         paintWrongAnswer(wrongButton);
     }
 
-    public void updateRightAnswerColors(RadioButton rightButton){
+    public void updateRightAnswerColors(RelativeLayout rightButton){
         paintCorrectAnswer(rightButton);
     }
 

@@ -3,6 +3,7 @@ package com.example.quiz.mvp2.quiz;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
@@ -24,6 +25,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 20000; // 20 seg
     private boolean timerRunning=true;
+    private boolean isQuestionAnswered=false;
 
 
     @Override
@@ -33,24 +35,18 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
     @Override
     public Question loadNextQuestion() {
+        isQuestionAnswered=false;
         firstAnswerAttempt=true;
-        quizContractView.setConfirmButtonVisibility(true);
         if(!questionsList.isEmpty()){
             startTimer();
             currQuestion=questionsList.remove();
             quizContractView.resetOptionColors();
             quizContractView.updateQuestionTextAndOptions(currQuestion);
-            quizContractView.setNextButtonVisibility(false);
-            quizContractView.setAnswerVisibility(false);
-            quizContractView.initRadioGroup();
         }else{
-
             quizContractView.hideAll();
-            quizContractView.setAnswerVisibility(false);
 
-            setEndScreenText();
+            //setEndScreenText();
 
-            quizContractView.setChangeFragButtonVisibility(true);
             currQuestion=null;
         }
         return currQuestion;
@@ -70,20 +66,22 @@ public class QuizPresenter  implements QuizContract.Presenter {
     }
 
     @Override
-    public void loadAnswerTextNButtons(RadioButton chosenButton) {
-        String chosenOption=chosenButton.getText().toString();
-        if(currQuestion!=null){
-            quizContractView.setNextButtonVisibility(true);
-            if(currQuestion.getAnswer().equals(chosenOption)){
-                quizContractView.updateRightAnswerColors(chosenButton);
-                score++;
+    public void loadAnswer(RelativeLayout chosenButton) {
+        String chosenOption=quizContractView.getButtonText(chosenButton);
+        if(!isQuestionAnswered){
+            if(currQuestion!=null){
+                if(currQuestion.getAnswer().equals(chosenOption)){
+                    quizContractView.updateRightAnswerColors(chosenButton);
+                    score++;
+                    isQuestionAnswered=true;
 
-            }else {
-                RadioButton rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
-                quizContractView.updateWrongAnswerColors(chosenButton,rightButton);
+                }else {
+                    RelativeLayout rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
+                    quizContractView.updateWrongAnswerColors(chosenButton,rightButton);
+                    isQuestionAnswered=true;
+                }
+                cancelTimer();
             }
-            quizContractView.setConfirmButtonVisibility(false);
-            cancelTimer();
         }
 
     }
@@ -227,18 +225,19 @@ public class QuizPresenter  implements QuizContract.Presenter {
             @Override
             public void onFinish() {
                 timerRunning=false;
-                if(!quizContractView.isQuestionAnswered()){
-                    quizContractView.setAnswerVisibility(true);
-                    quizContractView.setNextButtonVisibility(true);
-                    quizContractView.updateAnswerText("Time has run out :(");
-                    quizContractView.updateAnswerColor(Color.RED);
-                    quizContractView.setConfirmButtonVisibility(false);
+                if(!isQuestionAnswered){
+
                 }else{
                     quizContractView.changeTimerText("End");
                 }
             }
         }.start();
 
+    }
+
+    @Override
+    public boolean isQuestionAnswered() {
+        return isQuestionAnswered;
     }
 
     public void updateTimerColor(int timeLeft){

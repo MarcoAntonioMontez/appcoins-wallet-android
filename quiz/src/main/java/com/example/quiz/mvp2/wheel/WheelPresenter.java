@@ -39,7 +39,7 @@ public class WheelPresenter implements WheelContract.Presenter {
     public void loadRewardText() {
         double reward=MathUtilsFunc.truncatedRandomDouble();
         rewardSaver.setReward(reward);
-
+        wheelContractView.showCoinsNText();
         wheelContractView.showRewardAdder(reward, wheelContractView.getTextView("coinsText"));
     }
 

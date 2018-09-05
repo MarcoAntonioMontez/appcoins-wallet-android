@@ -87,7 +87,6 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
             @Override
             public void onAnimationEnd(Animation animation)
             {
-                showCoinsNText();
                 mPresenter.loadRewardText();
                 greyBackground.setOnClickListener(
                         new View.OnClickListener(){

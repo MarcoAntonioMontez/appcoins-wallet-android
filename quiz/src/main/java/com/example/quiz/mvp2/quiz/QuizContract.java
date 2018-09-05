@@ -1,6 +1,7 @@
 package com.example.quiz.mvp2.quiz;
 
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.example.quiz.mvp2.BasePresenter;
 import com.example.quiz.mvp2.BaseView;
@@ -14,29 +15,25 @@ public interface QuizContract {
         public void updateQuestionText(String text);
         public void updateAnswerText(String text);
         public void updateAnswerColor(int textColor);
-        public void setNextButtonVisibility(boolean visibility);
-        public void setChangeFragButtonVisibility(boolean visibility);
-        public void setAnswerVisibility(boolean visibility);
         public void setQuestionVisibility(boolean visibility);
         public void hideAll();
-        public void initRadioGroup();
         public void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
         public void setEndScreenTextVisibility(boolean visibility);
-        public void setConfirmButtonVisibility(boolean visibility);
         public void changeTimerText(String text);
         public void setTimerTextColor(int color);
-        public boolean isQuestionAnswered();
+        public String getButtonText(RelativeLayout button);
 
-        public RadioButton getButtonFromText(String text);
-        public void updateWrongAnswerColors(RadioButton wrongButton, RadioButton rightButton);
+        public RelativeLayout getButtonFromText(String text);
+        public void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton);
         public void resetOptionColors();
-        public void updateRightAnswerColors(RadioButton rightButton);
+        public void updateRightAnswerColors(RelativeLayout rightButton);
     }
 
     interface Presenter extends BasePresenter {
         public void changeFragment();
         public Question loadNextQuestion();
-        public void loadAnswerTextNButtons(RadioButton chosenButton);
+        public void loadAnswer(RelativeLayout relativeLayout);
         public void startTimer();
+        public boolean isQuestionAnswered();
     }
 }
