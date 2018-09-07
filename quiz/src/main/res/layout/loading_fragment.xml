@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/appc_quest_loading"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/ic_appcoins_quest_logo" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/appc_quest_loading"
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:id="@+id/text_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AppCoins"
+            android:layout_centerVertical="true"
+
+
+            android:fontFamily="sans-serif"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/text_left"
+            android:text="Quest"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+
+            android:fontFamily="sans-serif"
+            android:textColor="@color/orange"
+            android:textSize="26sp"
+            android:textStyle="normal"
+            />
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

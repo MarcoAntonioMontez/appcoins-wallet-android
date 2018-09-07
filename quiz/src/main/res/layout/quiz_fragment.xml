@@ -11,8 +11,7 @@
         android:layout_height="300dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/app_bar_square">
-    </LinearLayout>
+        android:background="@drawable/app_bar_square"></LinearLayout>
 
     <ImageView
         android:id="@+id/left_arrow_quiz"
@@ -53,28 +52,44 @@
         android:textStyle="normal"
         android:text="Question     01     02     03" />
 
-    <TextView
-        android:id="@+id/question_text_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
+    <RelativeLayout
+        android:id="@+id/question_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="150dp"
         android:layout_marginRight="20dp"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="normal"
-        android:textColor="#ffffff"
-        android:letterSpacing="0.01"
-        android:lineSpacingExtra="4sp"
-        android:text="What is the name of the famous Bitcoin exchange from japan  that collapsed in 2014?"
-        />
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/question_index"
+        >
+
+        <TextView
+            android:id="@+id/question_text_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="#ffffff"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="4sp"
+            android:text="What is asdasd asdadas asds as assafas asa asa as  "
+
+            />
+
+
+    </RelativeLayout>
+
+
 
 
 
 
     <TextView
         android:id="@+id/totalReward"
-        android:layout_below="@+id/question_text"
+        android:layout_below="@+id/question_layout"
         android:layout_marginTop="270dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,139 +104,101 @@
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_above="@+id/appc_logo"
-        android:elevation="10dp"
-        android:background="@drawable/rectangle"
+        android:layout_below="@+id/question_layout"
+        android:orientation="vertical"
         >
 
-        <RelativeLayout
-            android:id="@+id/quiz_btn_1"
-            android:layout_above="@+id/quiz_btn_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/quiz_btn_text_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_regular"
-                android:textStyle="normal|bold"
-                android:textColor="#000000"
-                android:lineSpacingExtra="2sp"
-                android:gravity="center_horizontal"
-                android:text="_Blockchain.info"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/quiz_btn_2"
-            android:layout_below="@+id/line_1_quiz"
-            android:layout_above="@+id/quiz_btn_3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
         <TextView
-            android:id="@+id/quiz_btn_text_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:id="@+id/quiz_btn_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:elevation="@dimen/normal_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:gravity="center"
             android:textSize="16sp"
             android:fontFamily="@font/roboto_regular"
             android:textStyle="normal|bold"
             android:textColor="#000000"
             android:lineSpacingExtra="2sp"
-            android:gravity="center_horizontal"
-            android:text="_Tradehill"
+            android:text="_Blockchain.info"
             />
-    </RelativeLayout>
 
-
-        <RelativeLayout
-            android:id="@+id/quiz_btn_3"
-            android:layout_below="@+id/line_2_quiz"
-            android:layout_above="@+id/quiz_btn_4"
+        <TextView
+            android:id="@+id/quiz_btn_text_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:elevation="@dimen/normal_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
 
-            <TextView
-                android:id="@+id/quiz_btn_text_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_regular"
-                android:textStyle="normal|bold"
-                android:textColor="#000000"
-                android:lineSpacingExtra="2sp"
-                android:gravity="center_horizontal"
-                android:text="_MT. Gox"
-                />
-        </RelativeLayout>
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="normal|bold"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="_Blockchain.info"
+            />
 
-        <RelativeLayout
-            android:id="@+id/quiz_btn_4"
-            android:layout_below="@+id/line_3_quiz"
+        <TextView
+            android:id="@+id/quiz_btn_text_3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:elevation="@dimen/normal_margin"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
 
-            <TextView
-                android:id="@+id/quiz_btn_text_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textSize="16sp"
-                android:fontFamily="@font/roboto_regular"
-                android:textStyle="normal|bold"
-                android:textColor="#000000"
-                android:lineSpacingExtra="2sp"
-                android:gravity="center_horizontal"
-                android:text="_Bitstamp"
-                android:typeface="normal"
-                />
-        </RelativeLayout>
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="normal|bold"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="_Blockchain.info"
+            />
 
-        <View
-            android:id="@+id/line_1_quiz"
+        <TextView
+            android:id="@+id/quiz_btn_text_4"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="77dp"
-            android:background="@drawable/line"
-            android:visibility="visible"/>
-        <View
-            android:id="@+id/line_2_quiz"
-            android:layout_below="@+id/line_1_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="77dp"
-            android:background="@drawable/line"
-            android:visibility="visible"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle"
+            android:elevation="@dimen/normal_margin"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
 
-        <View
-            android:id="@+id/line_3_quiz"
-            android:layout_below="@+id/line_2_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="77dp"
-            android:background="@drawable/line"
-            android:visibility="visible"/>
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_regular"
+            android:textStyle="normal|bold"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="_Blockchain.info"
+            />
 
 
-    </RelativeLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/timerText"
@@ -275,6 +252,5 @@
         android:layout_marginRight="20dp"
         app:srcCompat="@drawable/ic_primary_logo"
         />
-
 
 </RelativeLayout>

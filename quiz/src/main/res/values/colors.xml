@@ -6,10 +6,14 @@
     <color name="lightShadow">#14000000</color>
     <color name="Shadow">#23000000</color>
 
-    <color name="gray_answer">#407a7a7a</color>
-    <color name="green_answer">#d033b293</color>
-    <color name="red_answer">#d0c31a1a</color>
-    <color name="white_answer">#d0FFFFFF</color>
+    <color name="grey_answer">#8a8a8a</color>
+    <color name="green_answer">#33b293</color>
+    <color name="red_answer">#c31a1a</color>
+    <color name="white_answer">#FFFFFF</color>
+
+    <color name="grey_text">#d3d3d3</color>
+
+
 
 
 

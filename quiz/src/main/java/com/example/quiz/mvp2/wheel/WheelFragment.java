@@ -198,5 +198,10 @@ public class WheelFragment extends Fragment implements  WheelContract.View{
         return null;
     }
 
+    @Override
+    public void runCoinsAnimation() {
+
+    }
+
 
 }

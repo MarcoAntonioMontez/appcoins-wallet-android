@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/app_bar_square">
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_appcoins_quest_logo_horizonta"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="21dp"
+        android:layout_marginRight="20dp"/>
+
+    <ImageView
+        android:id="@+id/left_arrow_menu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/appc_quest_menu"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_appcoins_quest_logo"
+        />
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="156dp"
+        android:text="Feeling Lucky?"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/sub_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_text"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="6dp"
+        android:text="Chalenge yourself everyday in order to earn APPC completely for free. You can play this chalenge everyday"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/black"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sub_title_text"
+        android:layout_above="@id/appc_logo"
+        android:layout_margin="20dp"
+        android:background="@drawable/rectangle"
+        android:elevation="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/menu_quiz_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/menu_quiz" />
+
+        <TextView
+            android:id="@+id/sub_title_square_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/menu_quiz_img"
+            android:text="Super Quiz"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/square_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/sub_title_square_quiz"
+            android:text="Test your knownledge about blockchain answering 3 questions to get APPC"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            android:fontFamily="sans-serif"
+            />
+
+
+
+        <TextView
+            android:id="@+id/play_btn_menu_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#e9645d"
+            android:letterSpacing="0.09"
+            android:text="Play"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="29dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Current Prize:"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/cur_prize_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/appc_logo"
+        android:fontFamily="sans-serif"
+        android:text="0 APPC"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/appc_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="11dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_primary_logo"
+        />
+</RelativeLayout>

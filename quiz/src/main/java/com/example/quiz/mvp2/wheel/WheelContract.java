@@ -21,6 +21,7 @@ public interface WheelContract {
         public void showRewardAdder(double reward, TextView textView);
         public void setRewardWalletVisibility(boolean visibility);
         public TextView getTextView(String text);
+        void runCoinsAnimation();
 
     }
 

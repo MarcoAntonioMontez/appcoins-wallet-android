@@ -4,7 +4,11 @@ import android.support.v4.app.Fragment;
 
 public interface FragmentNavigator {
     interface Activity{
-        void setQuizFragment();
+        void setLoadingFragment();
+        void setMenuWheelFragment();
         void setWheelFragment();
+        void setQuizFragment();
+        void setQuizMenuFragment();
+        void setWheelMenuDisabled();
     }
 }

@@ -8,6 +8,8 @@ import com.example.quiz.mvp2.BasePresenter;
 import com.example.quiz.mvp2.BaseView;
 import com.example.quiz.quiz.quizObjects.Question;
 
+import org.w3c.dom.Text;
+
 public interface QuizContract {
     interface View extends BaseView<Presenter> {
         void onClickNextFragButton();
@@ -19,12 +21,12 @@ public interface QuizContract {
         void setEndScreenTextVisibility(boolean visibility);
         void changeTimerText(String text);
         void setTimerTextColor(int color);
-        String getButtonText(RelativeLayout button);
+        String getButtonText(TextView button);
 
-        RelativeLayout getButtonFromText(String text);
-        void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton);
+        TextView getButtonFromText(String text);
+        void updateWrongAnswerColors(TextView wrongButton, TextView rightButton);
         void resetOptionColors();
-        void updateRightAnswerColors(RelativeLayout rightButton);
+        void updateRightAnswerColors(TextView rightButton);
         void setRewardText(String text);
         public void showRewardAdder(final double reward, final TextView textview);
         public TextView getTextView(String text);
@@ -34,7 +36,7 @@ public interface QuizContract {
     interface Presenter extends BasePresenter {
         void changeFragment();
         Question loadNextQuestion();
-        void loadAnswer(RelativeLayout relativeLayout);
+        void loadAnswer(TextView TextView);
         void startTimer();
         boolean isQuestionAnswered();
     }

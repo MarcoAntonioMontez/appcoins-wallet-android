@@ -1,6 +1,8 @@
 package com.example.quiz.mvp2.quiz;
 
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -46,14 +48,18 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     private QuizContract.Presenter mPresenter;
     private MainActivity myActivity;
     private RewardSaver rewardSaver;
-    private RelativeLayout quizBtn1;
-    private RelativeLayout quizBtn2;
-    private RelativeLayout quizBtn3;
-    private RelativeLayout quizBtn4;
     private TextView quizBtnText1;
     private TextView quizBtnText2;
     private TextView quizBtnText3;
     private TextView quizBtnText4;
+    private int idWhiteRectangleBackground;
+    private int idRedRectangleBackground;
+    private int idGrayRectangleBackground;
+    private int idGreenRectangleBackground;
+    private int whiteText;
+    private int grayText;
+    private int blackText;
+
 
     //RewardAdder
     long timeInMilliseconds= 1000; //milisec
@@ -74,51 +80,55 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         question = (TextView) view.findViewById(R.id.question_text_quiz);
         totalScoreText = (TextView) view.findViewById(R.id.cur_prize_text);
         countDownText = (TextView) view.findViewById(R.id.timerText);
-        quizBtn1 = (RelativeLayout) view.findViewById(R.id.quiz_btn_1);
-        quizBtn2 = (RelativeLayout) view.findViewById(R.id.quiz_btn_2);
-        quizBtn3 = (RelativeLayout) view.findViewById(R.id.quiz_btn_3);
-        quizBtn4 = (RelativeLayout) view.findViewById(R.id.quiz_btn_4);
-
         quizBtnText1 = (TextView) view.findViewById(R.id.quiz_btn_text_1);
         quizBtnText2 = (TextView) view.findViewById(R.id.quiz_btn_text_2);
         quizBtnText3 = (TextView) view.findViewById(R.id.quiz_btn_text_3);
         quizBtnText4 = (TextView) view.findViewById(R.id.quiz_btn_text_4);
+
+        idWhiteRectangleBackground = (int) R.drawable.rectangle_white;
+        idRedRectangleBackground = (int) R.drawable.rectangle_red;
+        idGrayRectangleBackground = (int) R.drawable.rectangle_gray;
+        idGreenRectangleBackground = (int) R.drawable.rectangle_green;
+
+        whiteText = Color.WHITE;
+        grayText = Color.BLACK;
+        blackText = Color.BLACK;
+
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
 
         currentReward=rewardSaver.getTotalScore();
 
-
         mPresenter.loadNextQuestion();
 
-        quizBtn1.setOnClickListener(new View.OnClickListener() {
+        quizBtnText1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.loadAnswer(quizBtn1);
+                mPresenter.loadAnswer(quizBtnText1);
             }
         });
 
-        quizBtn2.setOnClickListener(new View.OnClickListener() {
+        quizBtnText2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.loadAnswer(quizBtn2);
-
-            }
-        });
-
-        quizBtn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.loadAnswer(quizBtn3);
+                mPresenter.loadAnswer(quizBtnText2);
 
             }
         });
 
-        quizBtn4.setOnClickListener(new View.OnClickListener() {
+        quizBtnText3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPresenter.loadAnswer(quizBtn4);
+                mPresenter.loadAnswer(quizBtnText3);
+
+            }
+        });
+
+        quizBtnText4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadAnswer(quizBtnText4);
 
             }
         });
@@ -127,32 +137,20 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
-    public String getButtonText(RelativeLayout button){
-        TextView textView=null;
-        String text="Button not Found";
-        if(button==quizBtn1){
-             textView=quizBtnText1;
-        } else if(button==quizBtn2) {
-            textView=quizBtnText2;
-        } else if(button==quizBtn3) {
-            textView=quizBtnText3;
-        } else if(button==quizBtn4) {
-            textView=quizBtnText4;
+    public String getButtonText(TextView button){
+        if(button!=null){
+            return button.getText().toString();
         }
-        if(textView!=null){
-            text=textView.getText().toString();
-        }
-
-        return text;
+        return null;
     }
 
     public void hideAll() {
         nextQuestionButton.setVisibility(View.INVISIBLE);
         question.setVisibility(View.INVISIBLE);
-        quizBtn1.setVisibility(View.INVISIBLE);
-        quizBtn2.setVisibility(View.INVISIBLE);
-        quizBtn3.setVisibility(View.INVISIBLE);
-        quizBtn4.setVisibility(View.INVISIBLE);
+        quizBtnText1.setVisibility(View.INVISIBLE);
+        quizBtnText2.setVisibility(View.INVISIBLE);
+        quizBtnText3.setVisibility(View.INVISIBLE);
+        quizBtnText4.setVisibility(View.INVISIBLE);
         text_result.setVisibility(View.INVISIBLE);
 
     }
@@ -219,15 +217,15 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     @Override
-    public RelativeLayout getButtonFromText(String text) {
-        if (getButtonText(quizBtn1).equals(text)) {
-            return quizBtn1;
-        } else if (getButtonText(quizBtn2).equals(text)) {
-            return quizBtn2;
-        } else if (getButtonText(quizBtn3).equals(text)) {
-            return quizBtn3;
-        } else if (getButtonText(quizBtn4).equals(text)) {
-            return quizBtn4;
+    public TextView getButtonFromText(String text) {
+        if (getButtonText(quizBtnText1).equals(text)) {
+            return quizBtnText1;
+        } else if (getButtonText(quizBtnText2).equals(text)) {
+            return quizBtnText2;
+        } else if (getButtonText(quizBtnText3).equals(text)) {
+            return quizBtnText3;
+        } else if (getButtonText(quizBtnText4).equals(text)) {
+            return quizBtnText4;
         }
         return null;
     }
@@ -239,23 +237,25 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 //        quizBtn4.setBackgroundColor(Color.WHITE);
     }
 
-    public void paintCorrectAnswer(RelativeLayout layout){
-        layout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_answer));
+    public void paintCorrectAnswer(TextView quizButton){
+        quizButton.setBackground(getResources().getDrawable(idGreenRectangleBackground));
+        quizButton.setTextColor(whiteText);
 
     }
 
-    public void paintWrongAnswer(RelativeLayout layout){
-        layout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_answer));
+    public void paintWrongAnswer(TextView quizButton){
+        quizButton.setBackground(getResources().getDrawable(idRedRectangleBackground));
+        quizButton.setTextColor(whiteText);
     }
 
     @Override
-    public void updateWrongAnswerColors(RelativeLayout wrongButton, RelativeLayout rightButton){
+    public void updateWrongAnswerColors(TextView wrongButton, TextView rightButton){
         updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
         paintWrongAnswer(wrongButton);
     }
 
-    public void updateRightAnswerColors(RelativeLayout rightButton){
+    public void updateRightAnswerColors(TextView rightButton){
         updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
     }
@@ -293,18 +293,27 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     }
 
     public void updateButtonsColorWhenAnswered(){
-        quizBtn1.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
-        quizBtn2.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
-        quizBtn3.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
-        quizBtn4.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gray_answer));
+        quizBtnText1.setBackground(getResources().getDrawable(idGrayRectangleBackground));
+        quizBtnText2.setBackground(getResources().getDrawable(idGrayRectangleBackground));
+        quizBtnText3.setBackground(getResources().getDrawable(idGrayRectangleBackground));
+        quizBtnText4.setBackground(getResources().getDrawable(idGrayRectangleBackground));
 
+        quizBtnText1.setTextColor(grayText);
+        quizBtnText2.setTextColor(grayText);
+        quizBtnText3.setTextColor(grayText);
+        quizBtnText4.setTextColor(grayText);
     }
 
     public void resetButtonsColor(){
-        quizBtn1.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
-        quizBtn2.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
-        quizBtn3.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
-        quizBtn4.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white_answer));
+        quizBtnText1.setBackground(getResources().getDrawable(idWhiteRectangleBackground));
+        quizBtnText2.setBackground(getResources().getDrawable(idWhiteRectangleBackground));
+        quizBtnText3.setBackground(getResources().getDrawable(idWhiteRectangleBackground));
+        quizBtnText4.setBackground(getResources().getDrawable(idWhiteRectangleBackground));
+
+        quizBtnText1.setTextColor(blackText);
+        quizBtnText2.setTextColor(blackText);
+        quizBtnText3.setTextColor(blackText);
+        quizBtnText4.setTextColor(blackText);
     }
 
 }

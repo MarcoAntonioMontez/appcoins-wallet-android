@@ -23,7 +23,7 @@ public class WheelPresenter implements WheelContract.Presenter {
 
     @Override
     public void changeFragment(){
-        fragmentNavigator.setQuizFragment();
+        fragmentNavigator.setQuizMenuFragment();
 
     }
 
@@ -40,6 +40,7 @@ public class WheelPresenter implements WheelContract.Presenter {
         double reward=MathUtilsFunc.truncatedRandomDouble();
         rewardSaver.setReward(reward);
         wheelContractView.showCoinsNText();
+        wheelContractView.runCoinsAnimation();
         wheelContractView.showRewardAdder(reward, wheelContractView.getTextView("coinsText"));
     }
 

@@ -5,6 +5,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.quiz.R;
+import com.example.quiz.mvp2.loading.LoadingFragment;
+import com.example.quiz.mvp2.menu.MenuWheelFragment;
+import com.example.quiz.mvp2.menu.QuizMenuFragment;
+import com.example.quiz.mvp2.menu.WheelMenuDisabledFragment;
 import com.example.quiz.mvp2.quiz.QuizFragment;
 import com.example.quiz.mvp2.quiz.QuizPresenter;
 import com.example.quiz.mvp2.wheel.Dummy_fragment;
@@ -39,21 +43,23 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
                 return;
             }
 
-            // Create a new Fragment to be placed in the activity layout
-            //WheelFragment firstFragment = new WheelFragment();
-            //Dummy_fragment firstFragment = new Dummy_fragment();
-            WheelFragment_v1 firstFragment = new WheelFragment_v1();
+//            // Create a new Fragment to be placed in the activity layout
+//            //WheelFragment firstFragment = new WheelFragment();
+//            //Dummy_fragment firstFragment = new Dummy_fragment();
+//            WheelFragment_v1 firstFragment = new WheelFragment_v1();
+//
+//            // In case this activity was started with special instructions from an
+//            // Intent, pass the Intent's extras to the fragment as arguments
+//            firstFragment.setArguments(getIntent().getExtras());
+//
+//            // Add the fragment to the 'fragment_container' FrameLayout
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment_container, firstFragment).commit();
+//
+//            //Create the Presenter
+//            mPresenter = new WheelPresenter(firstFragment,this,rewardSaver);
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
-
-            //Create the Presenter
-            mPresenter = new WheelPresenter(firstFragment,this,rewardSaver);
+            setLoadingFragment();
         }
 
     }
@@ -69,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.fragment_container, newFragment,"QuizFrag");
-        transaction.addToBackStack(null);
+        //transaction.addToBackStack(null);
 
         transaction.commit();
 
@@ -78,8 +84,30 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
     }
 
     @Override
+    public void setQuizMenuFragment() {
+        QuizMenuFragment newFragment = new QuizMenuFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void setWheelMenuDisabled() {
+        WheelMenuDisabledFragment newFragment = new WheelMenuDisabledFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
     public void setWheelFragment() {
-        WheelFragment newFragment = new WheelFragment();
+        WheelFragment_v1 newFragment = new WheelFragment_v1();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -90,5 +118,28 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         //Update Presenter
         mPresenter = new WheelPresenter(newFragment,this, rewardSaver);
     }
+
+    @Override
+    public void setLoadingFragment() {
+        LoadingFragment newFragment = new LoadingFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void setMenuWheelFragment() {
+        MenuWheelFragment newFragment = new MenuWheelFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
 }

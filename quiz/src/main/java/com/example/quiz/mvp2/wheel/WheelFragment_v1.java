@@ -31,6 +31,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     RewardSaver rewardSaver;
     Context context;
     LottieAnimationView animationView;
+    LottieAnimationView coinsAnimationView;
     Button playBtn;
     ImageView prevBtn;
     TextView rewardText;
@@ -61,13 +62,14 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
 
         rewardText=(TextView) view.findViewById(R.id.cur_prize_text);
         animationView = (LottieAnimationView) view.findViewById(R.id.lottie_view);
+        coinsAnimationView = (LottieAnimationView) view.findViewById(R.id.coins_animation);
         prevBtn = (ImageView) view.findViewById(R.id.left_arrow);
         animationView.setAnimation("final_wheel.json");
+        coinsAnimationView.setAnimation("coins.json");
         timerText = (TextView) view.findViewById(R.id.wheel_timer_text);
         rewardWallet=(TextView) view.findViewById(R.id.reward_wallet);
         playBtn = (Button) view.findViewById(R.id.play_btn);
         greyBackground = (ImageView) view.findViewById(R.id.gray_background);
-        coins = (ImageView) view.findViewById(R.id.coins);
         coinsText = (TextView) view.findViewById(R.id.coins_text);
 
         myActivity= (MainActivity) getActivity();
@@ -106,7 +108,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                //mPresenter.loadRewardText();
+                mPresenter.loadRewardText();
                 fadeOut();
 
             }
@@ -146,8 +148,14 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
         return view;
     }
 
+
     public void runWheelAnimation(LottieAnimationView animationView){
         animationView.playAnimation();
+    }
+
+    @Override
+    public void runCoinsAnimation(){
+        coinsAnimationView.playAnimation();
     }
 
 
@@ -159,7 +167,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     @Override
     public void showCoinsNText() {
         greyBackground.setVisibility(View.VISIBLE);
-        coins.setVisibility(View.VISIBLE);
+        coinsAnimationView.setVisibility(View.VISIBLE);
         coinsText.setVisibility(View.VISIBLE);
     }
 

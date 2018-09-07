@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.quiz.mvp2.FragmentNavigator;
 import com.example.quiz.mvp2.MainActivity;
@@ -30,12 +31,12 @@ public class QuizPresenter  implements QuizContract.Presenter {
     final Handler handler= new Handler();
 
     double fixedQuizReward=0.3;
-    int quizBufferTime=5000;
+    int quizBufferTime=2000;
 
 
     @Override
     public void changeFragment() {
-         fragmentNavigator.setWheelFragment();
+         fragmentNavigator.setWheelMenuDisabled();
     }
 
     @Override
@@ -50,6 +51,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
             quizContractView.resetOptionColors();
             quizContractView.updateQuestionTextAndOptions(currQuestion);
         }else{
+            changeFragment();
             //quizContractView.hideAll();
             //setEndScreenText();
             currQuestion=null;
@@ -71,8 +73,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
     }
 
     @Override
-    public void loadAnswer(RelativeLayout chosenButton) {
-        String chosenOption=quizContractView.getButtonText(chosenButton);
+    public void loadAnswer(TextView chosenButton) {
+        String chosenOption=chosenButton.getText().toString();
         if(!isQuestionAnswered){
             if(currQuestion!=null){
                 if(currQuestion.getAnswer().equals(chosenOption)){
@@ -83,7 +85,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
                     quizContractView.showRewardAdder(fixedQuizReward, quizContractView.getTextView("totalScoreText"));
 
                 }else {
-                    RelativeLayout rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
+                    TextView rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
                     quizContractView.updateWrongAnswerColors(chosenButton,rightButton);
                     isQuestionAnswered=true;
                 }

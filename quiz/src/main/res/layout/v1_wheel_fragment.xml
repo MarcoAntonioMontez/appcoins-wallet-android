@@ -133,7 +133,7 @@
         android:id="@+id/gray_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E0000000"
+        android:background="#F4FFFFFF"
         android:visibility="invisible"
         >
         </ImageView>
@@ -143,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/coins"
+        android:layout_below="@+id/coins_animation"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
         android:text="+0 APPC"
@@ -152,14 +152,14 @@
         android:textStyle="normal"
         android:visibility="invisible" />
 
-    <ImageView
-        android:id="@+id/coins"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/coins_animation"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:visibility="invisible"
-        app:srcCompat="@drawable/ic_coins" />
+         />
 
 
 </RelativeLayout>
