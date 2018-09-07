@@ -19,8 +19,6 @@ public interface QuizContract {
         void hideAll();
         void setEndScreenRewardText(String wheelScoreText, String quizScoreText, String totalScoreText);
         void setEndScreenTextVisibility(boolean visibility);
-        void changeTimerText(String text);
-        void setTimerTextColor(int color);
         String getButtonText(TextView button);
 
         TextView getButtonFromText(String text);
@@ -31,13 +29,19 @@ public interface QuizContract {
         public void showRewardAdder(final double reward, final TextView textview);
         public TextView getTextView(String text);
         public void resetButtonsColor();
+        void setTimerOutScreenVisibility(boolean visibility);
+        boolean isTimerOutOnScreen();
+        void setQuizButtonsClickable(boolean isClickable);
+        void runTimerAnimation();
+        public void pauseTimerAnimation();
     }
 
     interface Presenter extends BasePresenter {
         void changeFragment();
         Question loadNextQuestion();
         void loadAnswer(TextView TextView);
-        void startTimer();
         boolean isQuestionAnswered();
+        void loadQuestionsFromTimerButton();
+        void onTimerEnd();
     }
 }

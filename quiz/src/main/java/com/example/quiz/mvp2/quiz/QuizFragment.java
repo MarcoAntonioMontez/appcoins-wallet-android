@@ -1,5 +1,6 @@
 package com.example.quiz.mvp2.quiz;
 
+import android.animation.Animator;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -32,14 +33,12 @@ import java.util.LinkedList;
 
 
 public class QuizFragment extends Fragment implements QuizContract.View{
-    LottieAnimationView animationView;
     ImageView nextQuestionButton;
     TextView question;
     TextView text_result;
     TextView wheelScoreText;
     TextView quizScoreText;
     TextView totalScoreText;
-    private TextView countDownText;
 
 
     Question currQuestion;
@@ -59,6 +58,9 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     private int whiteText;
     private int grayText;
     private int blackText;
+    private RelativeLayout timerOutScreen;
+    private Button timerNextBtn;
+    LottieAnimationView timerAnimation;
 
 
     //RewardAdder
@@ -79,7 +81,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
 
         question = (TextView) view.findViewById(R.id.question_text_quiz);
         totalScoreText = (TextView) view.findViewById(R.id.cur_prize_text);
-        countDownText = (TextView) view.findViewById(R.id.timerText);
         quizBtnText1 = (TextView) view.findViewById(R.id.quiz_btn_text_1);
         quizBtnText2 = (TextView) view.findViewById(R.id.quiz_btn_text_2);
         quizBtnText3 = (TextView) view.findViewById(R.id.quiz_btn_text_3);
@@ -94,13 +95,25 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         grayText = Color.BLACK;
         blackText = Color.BLACK;
 
+        timerOutScreen= (RelativeLayout) view.findViewById(R.id.timer_out_screen);
+        timerNextBtn = (Button) view.findViewById(R.id.next_timer_btn);
+
+        timerAnimation = (LottieAnimationView) view.findViewById(R.id.timer_animation);
+        timerAnimation.setAnimation("timer-final.json");
 
         myActivity= (MainActivity) getActivity();
         rewardSaver=myActivity.getRewardSaver();
 
         currentReward=rewardSaver.getTotalScore();
-
         mPresenter.loadNextQuestion();
+
+        timerNextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPresenter.loadQuestionsFromTimerButton();
+            }
+        });
+
 
         quizBtnText1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +146,37 @@ public class QuizFragment extends Fragment implements QuizContract.View{
             }
         });
 
+        timerAnimation.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mPresenter.onTimerEnd();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
         return view;
+    }
+
+    public void runTimerAnimation(){
+        timerAnimation.playAnimation();
+    }
+
+    public void pauseTimerAnimation(){
+        timerAnimation.pauseAnimation();
     }
 
     @Override
@@ -187,18 +230,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
             totalScoreText.setVisibility(View.INVISIBLE);
         }
     }
-
-
-    @Override
-    public void changeTimerText(String text) {
-        countDownText.setText(text);
-    }
-
-    @Override
-    public void setTimerTextColor(int color) {
-        countDownText.setTextColor(color);
-    }
-
 
     @Override
     public void onClickNextFragButton() {
@@ -314,6 +345,40 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         quizBtnText2.setTextColor(blackText);
         quizBtnText3.setTextColor(blackText);
         quizBtnText4.setTextColor(blackText);
+    }
+
+
+
+    @Override
+    public void setTimerOutScreenVisibility(boolean visibility) {
+        if(visibility){
+            timerOutScreen.setVisibility(View.VISIBLE);
+        }else{
+            timerOutScreen.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public boolean isTimerOutOnScreen() {
+        if(timerOutScreen.getVisibility()==View.VISIBLE)  {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setQuizButtonsClickable(boolean isClickable) {
+        if(isClickable){
+            quizBtnText1.setClickable(true);
+            quizBtnText2.setClickable(true);
+            quizBtnText3.setClickable(true);
+            quizBtnText4.setClickable(true);
+        }else{
+            quizBtnText1.setClickable(false);
+            quizBtnText2.setClickable(false);
+            quizBtnText3.setClickable(false);
+            quizBtnText4.setClickable(false);
+        }
     }
 
 }

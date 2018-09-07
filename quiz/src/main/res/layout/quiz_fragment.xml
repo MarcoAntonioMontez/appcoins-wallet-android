@@ -52,11 +52,13 @@
         android:textStyle="normal"
         android:text="Question     01     02     03" />
 
+
+
     <RelativeLayout
         android:id="@+id/question_layout"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/question_index"
@@ -66,9 +68,10 @@
             android:id="@+id/question_text_quiz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
@@ -79,13 +82,17 @@
 
             />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/timer_animation"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/question_text_quiz"
+            />
+
 
     </RelativeLayout>
-
-
-
-
-
 
     <TextView
         android:id="@+id/totalReward"
@@ -109,7 +116,7 @@
         android:layout_height="match_parent"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:layout_above="@+id/appc_logo"
         android:layout_below="@+id/question_layout"
@@ -123,6 +130,8 @@
             android:layout_weight="1"
             android:background="@drawable/rectangle"
             android:elevation="@dimen/normal_margin"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -143,6 +152,8 @@
             android:layout_weight="1"
             android:background="@drawable/rectangle"
             android:elevation="@dimen/normal_margin"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -153,7 +164,7 @@
             android:textStyle="normal|bold"
             android:textColor="#000000"
             android:lineSpacingExtra="2sp"
-            android:text="_Blockchain.info"
+            android:text="Blockchain info that fits the entire screenjhk h"
             />
 
         <TextView
@@ -163,6 +174,8 @@
             android:layout_weight="1"
             android:background="@drawable/rectangle"
             android:elevation="@dimen/normal_margin"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -183,6 +196,8 @@
             android:layout_weight="1"
             android:background="@drawable/rectangle"
             android:elevation="@dimen/normal_margin"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -199,19 +214,6 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/question_text_quiz"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:text="20"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
 
 
     <TextView
@@ -252,5 +254,70 @@
         android:layout_marginRight="20dp"
         app:srcCompat="@drawable/ic_primary_logo"
         />
+
+    <RelativeLayout
+        android:id="@+id/timer_out_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:background="#F0000000">
+
+        <ImageView
+            android:id="@+id/timer_out_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_above="@+id/timer_title"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/ic_timer_out"
+            />
+
+        <TextView
+            android:id="@+id/timer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:textSize="26sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:text="Time´s out"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/sub_title_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timer_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:text="Don’t let the time go out or you will  \n miss the chance of earning more APPC."
+            android:visibility="visible"
+            />
+
+        <Button
+            android:id="@+id/next_timer_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="172dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@+id/sub_title_timer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:paddingEnd="@dimen/half_large_margin"
+            android:paddingStart="@dimen/half_large_margin"
+            android:text="Next"
+            android:textAllCaps="true"
+            android:visibility="visible"/>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.quiz.R;
 import com.example.quiz.mvp2.loading.LoadingFragment;
+import com.example.quiz.mvp2.menu.MenuPresenter;
 import com.example.quiz.mvp2.menu.MenuWheelFragment;
 import com.example.quiz.mvp2.menu.QuizMenuFragment;
 import com.example.quiz.mvp2.menu.WheelMenuDisabledFragment;
@@ -84,42 +85,6 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
     }
 
     @Override
-    public void setQuizMenuFragment() {
-        QuizMenuFragment newFragment = new QuizMenuFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, newFragment);
-        //transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    @Override
-    public void setWheelMenuDisabled() {
-        WheelMenuDisabledFragment newFragment = new WheelMenuDisabledFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, newFragment);
-        //transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    @Override
-    public void setWheelFragment() {
-        WheelFragment_v1 newFragment = new WheelFragment_v1();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, newFragment);
-        //transaction.addToBackStack(null);
-        transaction.commit();
-
-        //Update Presenter
-        mPresenter = new WheelPresenter(newFragment,this, rewardSaver);
-    }
-
-    @Override
     public void setLoadingFragment() {
         LoadingFragment newFragment = new LoadingFragment();
 
@@ -139,6 +104,48 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
         transaction.replace(R.id.fragment_container, newFragment);
         //transaction.addToBackStack(null);
         transaction.commit();
+
+        mPresenter = new MenuPresenter(newFragment,this, rewardSaver);
+    }
+
+    @Override
+    public void setWheelFragment() {
+        WheelFragment_v1 newFragment = new WheelFragment_v1();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+
+        //Update Presenter
+        mPresenter = new WheelPresenter(newFragment,this, rewardSaver);
+    }
+
+    @Override
+    public void setQuizMenuFragment() {
+        QuizMenuFragment newFragment = new QuizMenuFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+
+        mPresenter = new MenuPresenter(newFragment,this, rewardSaver);
+    }
+
+    @Override
+    public void setWheelMenuDisabled() {
+        WheelMenuDisabledFragment newFragment = new WheelMenuDisabledFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+
+        mPresenter = new MenuPresenter(newFragment,this, rewardSaver);
     }
 
 

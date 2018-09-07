@@ -40,41 +40,39 @@ public class QuizPresenter  implements QuizContract.Presenter {
     }
 
     @Override
+    public void onTimerEnd(){
+        quizContractView.setTimerOutScreenVisibility(true);
+        quizContractView.setQuizButtonsClickable(false);
+    }
+
+
+    public void onNextQuestion(){
+        quizContractView.runTimerAnimation();
+        currQuestion=questionsList.remove();
+        quizContractView.resetOptionColors();
+        quizContractView.updateQuestionTextAndOptions(currQuestion);
+
+    }
+
+    @Override
     public Question loadNextQuestion() {
         quizContractView.resetButtonsColor();
         quizContractView.setRewardText("" + rewardSaver.getTotalScore() + " APPC");
         isQuestionAnswered=false;
         firstAnswerAttempt=true;
         if(!questionsList.isEmpty()){
-            startTimer();
-            currQuestion=questionsList.remove();
-            quizContractView.resetOptionColors();
-            quizContractView.updateQuestionTextAndOptions(currQuestion);
+            onNextQuestion();
         }else{
             changeFragment();
-            //quizContractView.hideAll();
-            //setEndScreenText();
             currQuestion=null;
         }
         return currQuestion;
     }
 
-    public void setEndScreenText(){
-        rewardSaver.setQuizScore(score);
-        String wheelText="Wheel reward: " + rewardSaver.getReward() + " Apc";
-        String quizScoreText="Quiz Score: \n\n"+ "  Correct answers: "+score+" -> " + ((double)score*rewardSaver.getReward())
-                + " Apc"+"\n\n  Incorrect answers: " + (numberAnswers-score) + " -> 0 Apc";
-        String totalScoreText="\n\n\n\nTotal reward: "+ rewardSaver.getTotalScore()+ " Apc";
-
-
-        quizContractView.setEndScreenRewardText(wheelText,quizScoreText,totalScoreText);
-        quizContractView.setEndScreenTextVisibility(true);
-
-    }
-
     @Override
     public void loadAnswer(TextView chosenButton) {
         String chosenOption=chosenButton.getText().toString();
+        quizContractView.pauseTimerAnimation();
         if(!isQuestionAnswered){
             if(currQuestion!=null){
                 if(currQuestion.getAnswer().equals(chosenOption)){
@@ -89,7 +87,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
                     quizContractView.updateWrongAnswerColors(chosenButton,rightButton);
                     isQuestionAnswered=true;
                 }
-                cancelTimer();
+                //cancelTimer();
                 loadNextQuestionAfterTime(quizBufferTime);
                 //Put animation, timer, change screen here
             }
@@ -111,11 +109,6 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
     }
 
-    public void cancelTimer(){
-        countDownTimer.cancel();
-        quizContractView.changeTimerText("");
-
-    }
 
     public QuizPresenter(QuizContract.View quizContractView, FragmentNavigator.Activity fragmentNavigator, RewardSaver rewardSaver){
         this.quizContractView=quizContractView;
@@ -126,7 +119,23 @@ public class QuizPresenter  implements QuizContract.Presenter {
         questionsList=loadQuestions();
 
     }
+    private LinkedList<Question> loadQuestions(){
+        LinkedList<Question> questionList = createQuestions();
 
+        return questionList;
+    }
+
+    @Override
+    public boolean isQuestionAnswered() {
+        return isQuestionAnswered;
+    }
+
+    @Override
+    public void loadQuestionsFromTimerButton() {
+        loadNextQuestion();
+        quizContractView.setTimerOutScreenVisibility(false);
+        quizContractView.setQuizButtonsClickable(true);
+    }
 
     private LinkedList<Question> createQuestions(){
         LinkedList<Question> questionList = new LinkedList<Question>();
@@ -180,7 +189,7 @@ public class QuizPresenter  implements QuizContract.Presenter {
 //        question = new Question(optionsList, textQuestion, answer);
 //        questionList.add(question);
 
-                // 4th Question
+        // 4th Question
         //Initialize  optionsList
         optionsList = new LinkedList<String>();
         //Write the question, options and answer
@@ -226,61 +235,6 @@ public class QuizPresenter  implements QuizContract.Presenter {
         questionList.add(question);
 
         return questionList;
-    }
-
-    private LinkedList<Question> loadQuestions(){
-        LinkedList<Question> questionList = createQuestions();
-
-        return questionList;
-    }
-
-    public void startTimer(){
-        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
-            @Override
-            public void onTick(long l) {
-                updateTimerColor((int)l/1000);
-                quizContractView.changeTimerText(""+(int)l/1000);
-            }
-
-            @Override
-            public void onFinish() {
-                timerRunning=false;
-                if(!isQuestionAnswered){
-
-                }else{
-                    quizContractView.changeTimerText("End");
-                }
-            }
-        }.start();
-
-    }
-
-    @Override
-    public boolean isQuestionAnswered() {
-        return isQuestionAnswered;
-    }
-
-    public void updateTimerColor(int timeLeft){
-        final int startTime=19;
-        final int mediumTimeLeft=10;
-        final int lowTimeLeft=5;
-
-        switch (timeLeft){
-
-            case startTime : quizContractView.setTimerTextColor(Color.rgb(144,238,144));
-                //quizContractView.setTimerTextColor(Color.BLACK);
-
-                            break;
-
-            case mediumTimeLeft : quizContractView.setTimerTextColor(Color.rgb(255,165,0));
-                    break;
-
-            case lowTimeLeft: quizContractView.setTimerTextColor(Color.RED);
-                    break;
-
-            default: break;
-        }
-
     }
 
 }

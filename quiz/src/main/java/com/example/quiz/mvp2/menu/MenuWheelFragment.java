@@ -12,21 +12,29 @@ import android.widget.TextView;
 
 import com.example.quiz.R;
 import com.example.quiz.mvp2.MainActivity;
+import com.example.quiz.mvp2.quiz.QuizContract;
 
-public class MenuWheelFragment extends Fragment  {
+import org.w3c.dom.Text;
+
+public class MenuWheelFragment extends Fragment implements MenuContract.View  {
 
     private MainActivity myActivity;
     TextView playBtn;
     ImageView menuImg;
+    MenuContract.Presenter mPresenter;
+    TextView rewardText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_wheel, container, false);
 
         myActivity= (MainActivity) getActivity();
+        rewardText = (TextView) view.findViewById(R.id.menu_wheel_reward_text);
 
         playBtn= (TextView) view.findViewById(R.id.play_btn_menu_wheel);
         menuImg = (ImageView) view.findViewById(R.id.menu_wheel_img);
+
+        mPresenter.onLoad();
 
         playBtn.setOnClickListener(
                 new View.OnClickListener(){
@@ -51,4 +59,14 @@ public class MenuWheelFragment extends Fragment  {
         myActivity.setWheelFragment();
     }
 
+
+    @Override
+    public void setPresenter(MenuContract.Presenter presenter) {
+        mPresenter=presenter;
+    }
+
+    @Override
+    public void setRewardText(String str) {
+        rewardText.setText(str);
+    }
 }

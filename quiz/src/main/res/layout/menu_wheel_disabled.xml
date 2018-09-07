@@ -20,12 +20,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_appcoins_quest_logo_horizonta"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/appcoins_quest_logo_long"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"/>
 
     <ImageView
@@ -81,7 +81,10 @@
         android:layout_height="match_parent"
         android:layout_below="@id/sub_title_text"
         android:layout_above="@id/appc_logo"
-        android:layout_margin="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/rectangle"
         android:elevation="10dp"
         >
@@ -111,7 +114,7 @@
             android:id="@+id/gray_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F0505050"
+            android:background="#D0505050"
             android:visibility="visible"
             >
         </ImageView>
@@ -128,6 +131,7 @@
             android:fontFamily="sans-serif"
             android:textColor="#A0FFFFFF"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             />
 
     </RelativeLayout>
@@ -149,7 +153,7 @@
         android:textStyle="normal" />
 
     <TextView
-        android:id="@+id/cur_prize_text"
+        android:id="@+id/menu_wheel_disabled_reward_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
