@@ -10,5 +10,6 @@ public interface FragmentNavigator {
         void setQuizFragment();
         void setQuizMenuFragment();
         void setWheelMenuDisabled();
+        void setRewardMenuFragment();
     }
 }

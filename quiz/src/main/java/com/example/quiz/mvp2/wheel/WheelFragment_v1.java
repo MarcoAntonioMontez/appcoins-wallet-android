@@ -8,6 +8,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,10 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     ImageView coins;
     TextView coinsText;
     Animation animationFade;
+    private static final String TAG = "MyActivity";
+    int debugIndex=0;
+
+
 
 
     //Reward Adder
@@ -50,7 +55,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     long tickTime = (timeInMilliseconds/timeDivisions);
 
     double currentReward=0;
-    double newReward;
+    double newReward=0;
 
     @Override
     public void setPresenter(WheelContract.Presenter presenter) {
@@ -100,6 +105,25 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
             }
         });
 
+        coinsAnimationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mPresenter.changeFragment();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+
 
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override
@@ -108,7 +132,6 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                mPresenter.loadRewardText();
                 fadeOut();
 
             }
@@ -141,7 +164,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
         prevBtn.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                        onClickNextButton();
+                        myActivity.finish();
                     }
                 }
         );
@@ -215,12 +238,12 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
     public void showRewardAdder(final double reward, final TextView textview){
         this.newReward=reward;
 
-
         CountDownTimer countDownTimer = new CountDownTimer(timeInMilliseconds, tickTime) {
             @Override
             public void onTick(long l) {
-                currentReward=currentReward+(newReward/(double)timeDivisions);
-                textview.setText("" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC");
+                String str="" + MathUtilsFunc.roundTwoDecimals(currentReward) + " APPC";
+                currentReward=currentReward+((double)newReward/(double)timeDivisions);
+                textview.setText(str);
             }
 
             @Override

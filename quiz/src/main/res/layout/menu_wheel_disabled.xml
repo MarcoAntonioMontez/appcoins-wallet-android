@@ -18,36 +18,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/appcoins_quest_logo_long"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"/>
-
-    <ImageView
-        android:id="@+id/left_arrow_menu"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginLeft="15dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
-        />
-
-    <ImageView
-        android:id="@+id/appc_quest_menu"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_appcoins_quest_logo"
-        />
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
@@ -82,9 +52,10 @@
         android:layout_below="@id/sub_title_text"
         android:layout_above="@id/appc_logo"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
+
         android:background="@drawable/rectangle"
         android:elevation="10dp"
         >
@@ -104,35 +75,46 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/menu_wheel_img"
-            android:text="Lucky Wheel?"
+            android:text="Lucky Wheel"
             android:textSize="22sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"/>
 
-        <ImageView
-            android:id="@+id/gray_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#D0505050"
-            android:visibility="visible"
-            >
-        </ImageView>
-
         <TextView
             android:id="@+id/square_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
             android:layout_below="@id/sub_title_square_wheel"
-            android:layout_marginTop="15dp"
-            android:text="Well Played! \n Come back tomorrow for more"
-            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:text="Try spinning the wheel to get freeAPPC"
+            android:textSize="16sp"
             android:textStyle="normal"
             android:fontFamily="sans-serif"
-            android:textColor="#A0FFFFFF"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
             />
+
+
+
+        <TextView
+            android:id="@+id/play_btn_menu_wheel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#e9645d"
+            android:letterSpacing="0.09"
+            android:text="PLAY"
+            />
+
+
+
 
     </RelativeLayout>
 
@@ -153,7 +135,7 @@
         android:textStyle="normal" />
 
     <TextView
-        android:id="@+id/menu_wheel_disabled_reward_text"
+        android:id="@+id/cur_prize_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -176,6 +158,95 @@
         android:layout_marginRight="20dp"
         android:src="@drawable/ic_primary_logo"
         />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/timer_out_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="#F0000000">
+
+        <TextView
+            android:id="@+id/timer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:textSize="24sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:text="Tomorrow is another day"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/reward_text"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timer_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#757575"
+            android:text="Today your total earning was XX APPC
+Please come back tomorrow to earn
+even more appcoins"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:id="@+id/wallet_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="172dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_below="@+id/reward_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:paddingEnd="@dimen/half_large_margin"
+            android:paddingStart="@dimen/half_large_margin"
+            android:text="Wallet"
+            android:textAllCaps="true"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/appcoins_quest_logo_long"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="21dp"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:id="@+id/left_arrow_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            />
+
+        <ImageView
+            android:id="@+id/appc_quest_menu"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_appcoins_quest_logo"
+            />
+
 
 
     </RelativeLayout>

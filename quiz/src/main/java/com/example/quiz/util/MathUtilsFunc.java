@@ -10,6 +10,7 @@ public class MathUtilsFunc {
             double number;
             Random random = new Random();
             number = (random.nextDouble() + 0.4) * (1.0/1.4);
+            //number=(double)0.5;
             number=roundTwoDecimals(number);
             return number;
         }

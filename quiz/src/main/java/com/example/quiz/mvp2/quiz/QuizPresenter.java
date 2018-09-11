@@ -32,11 +32,12 @@ public class QuizPresenter  implements QuizContract.Presenter {
 
     double fixedQuizReward=0.3;
     int quizBufferTime=2000;
+    private int question_id=0;
 
 
     @Override
     public void changeFragment() {
-         fragmentNavigator.setWheelMenuDisabled();
+         fragmentNavigator.setRewardMenuFragment();
     }
 
     @Override
@@ -51,7 +52,13 @@ public class QuizPresenter  implements QuizContract.Presenter {
         currQuestion=questionsList.remove();
         quizContractView.resetOptionColors();
         quizContractView.updateQuestionTextAndOptions(currQuestion);
+        updateQuestionIndex();
 
+    }
+
+    public void updateQuestionIndex(){
+        question_id++;
+        quizContractView.colorQuestionIndex(question_id);
     }
 
     @Override
@@ -79,17 +86,16 @@ public class QuizPresenter  implements QuizContract.Presenter {
                     quizContractView.updateRightAnswerColors(chosenButton);
                     score++;
                     isQuestionAnswered=true;
-                    rewardSaver.addReward(fixedQuizReward);
-                    quizContractView.showRewardAdder(fixedQuizReward, quizContractView.getTextView("totalScoreText"));
+                    rewardSaver.addReward();
+                    quizContractView.showRewardAdder(rewardSaver.getWheelReward(), quizContractView.getTextView("totalScoreText"));
+                    quizContractView.runCoinsAnimation();
 
                 }else {
                     TextView rightButton = quizContractView.getButtonFromText(currQuestion.getAnswer());
                     quizContractView.updateWrongAnswerColors(chosenButton,rightButton);
                     isQuestionAnswered=true;
                 }
-                //cancelTimer();
                 loadNextQuestionAfterTime(quizBufferTime);
-                //Put animation, timer, change screen here
             }
         }
 
@@ -212,8 +218,8 @@ public class QuizPresenter  implements QuizContract.Presenter {
         optionsList.add("A type of blockchain");
         optionsList.add("An algorithm that predicts the next part of the chain");
         optionsList.add("A person doing calculations to verify a transaction");
-        optionsList.add("Computers that validate and process Blockchain transactions");
-        answer="Computers that validate and process Blockchain transactions";
+        optionsList.add("Computers that validate and process \nBlockchain transactions");
+        answer="Computers that validate and process \nBlockchain transactions";
 
         //Add the question to the list
         question = new Question(optionsList, textQuestion, answer);

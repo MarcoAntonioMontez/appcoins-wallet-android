@@ -20,6 +20,7 @@ public class QuizMenuFragment extends Fragment implements MenuContract.View {
     ImageView menuImg;
     MenuContract.Presenter mPresenter;
     TextView rewardText;
+    ImageView prevBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class QuizMenuFragment extends Fragment implements MenuContract.View {
         playBtn= (TextView) view.findViewById(R.id.play_btn_menu_quiz);
         menuImg = (ImageView) view.findViewById(R.id.menu_quiz_img);
         rewardText = (TextView) view.findViewById(R.id.menu_quiz_reward_text);
+        prevBtn = (ImageView) view.findViewById(R.id.left_arrow_menu);
 
         mPresenter.onLoad();
 
@@ -48,6 +50,13 @@ public class QuizMenuFragment extends Fragment implements MenuContract.View {
                     }
                 }
         );
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myActivity.finish();
+            }
+        });
 
         return view;
     }

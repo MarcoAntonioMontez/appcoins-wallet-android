@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/app_bar_square">
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/appc_logo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/appcoins_quest_logo_long"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"/>
+
+    <ImageView
+        android:id="@+id/left_arrow_menu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+        />
+
+    <ImageView
+        android:id="@+id/appc_quest_menu"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_appcoins_quest_logo"
+        />
+
+    <TextView
+        android:id="@+id/reward_menu_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appc_quest_menu"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="@color/orange"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        android:text="Congratulations!
+Today you earned 2 APPC."
+        />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/reward_cup_animation"
+        android:layout_below="@+id/reward_menu_text"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/ok_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="172dp"
+        android:layout_height="@dimen/button_height"
+        android:layout_below="@+id/reward_cup_animation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="@dimen/half_large_margin"
+        android:paddingStart="@dimen/half_large_margin"
+        android:text="Ok"
+        android:textAllCaps="true" />
+
+    <ImageView
+        android:id="@+id/share_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:srcCompat="@drawable/ic_share"
+        android:elevation="10dp"/>
+
+
+</RelativeLayout>

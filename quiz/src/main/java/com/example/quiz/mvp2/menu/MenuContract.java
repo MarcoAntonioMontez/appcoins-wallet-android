@@ -15,6 +15,8 @@ public interface MenuContract {
 
     interface Presenter extends BasePresenter {
         void onLoad();
+        void setRewardMenuText();
+        void setMenuDisabledText();
 
     }
 }

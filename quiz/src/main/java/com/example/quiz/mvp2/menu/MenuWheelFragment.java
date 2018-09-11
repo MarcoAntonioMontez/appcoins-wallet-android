@@ -23,6 +23,7 @@ public class MenuWheelFragment extends Fragment implements MenuContract.View  {
     ImageView menuImg;
     MenuContract.Presenter mPresenter;
     TextView rewardText;
+    ImageView backBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MenuWheelFragment extends Fragment implements MenuContract.View  {
 
         myActivity= (MainActivity) getActivity();
         rewardText = (TextView) view.findViewById(R.id.menu_wheel_reward_text);
+        backBtn= (ImageView) view.findViewById(R.id.left_arrow_menu);
 
         playBtn= (TextView) view.findViewById(R.id.play_btn_menu_wheel);
         menuImg = (ImageView) view.findViewById(R.id.menu_wheel_img);
@@ -51,6 +53,13 @@ public class MenuWheelFragment extends Fragment implements MenuContract.View  {
                     }
                 }
         );
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myActivity.finish();
+            }
+        });
 
         return view;
     }

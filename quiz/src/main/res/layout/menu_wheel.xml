@@ -15,16 +15,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/appcoins_quest_logo_long"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"/>
-
-    <ImageView
         android:id="@+id/left_arrow_menu"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -34,6 +24,18 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
         />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/appcoins_quest_logo_long"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"/>
+
+
 
     <ImageView
         android:id="@+id/appc_quest_menu"
@@ -65,7 +67,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="6dp"
-        android:text="Chalenge yourself everyday in order to earn APPC completely for free. You can play this chalenge everyday"
+        android:text="Challenge yourself everyday in order to earn APPC completely for free. You can play this challenge everyday"
         android:textSize="14sp"
         android:textStyle="normal"
         android:fontFamily="sans-serif"
@@ -78,7 +80,7 @@
         android:layout_below="@id/sub_title_text"
         android:layout_above="@id/appc_logo"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
 
@@ -89,7 +91,7 @@
         <ImageView
             android:id="@+id/menu_wheel_img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/menu_wheel" />
 
@@ -101,7 +103,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_below="@id/menu_wheel_img"
-            android:text="Lucky Wheel?"
+            android:text="Lucky Wheel"
             android:textSize="22sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif"
@@ -115,7 +117,7 @@
             android:layout_marginLeft="20dp"
             android:layout_below="@id/sub_title_square_wheel"
             android:layout_marginTop="5dp"
-            android:text="Try spinning the wheel to get freeAPPC"
+            android:text="Try spinning the wheel to get free APPC"
             android:textSize="16sp"
             android:textStyle="normal"
             android:fontFamily="sans-serif"
@@ -136,7 +138,7 @@
             android:textStyle="normal"
             android:textColor="#e9645d"
             android:letterSpacing="0.09"
-            android:text="Play"
+            android:text="PLAY"
             />
 
 

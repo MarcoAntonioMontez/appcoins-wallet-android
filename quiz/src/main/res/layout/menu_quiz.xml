@@ -35,15 +35,15 @@
         android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
         />
 
-        <ImageView
-            android:id="@+id/appc_quest_menu"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="70dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/ic_appcoins_quest_logo"
-            />
+    <ImageView
+        android:id="@+id/appc_quest_menu"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_appcoins_quest_logo"
+        />
 
 
     <TextView
@@ -80,7 +80,7 @@
         android:layout_below="@id/sub_title_text"
         android:layout_above="@id/appc_logo"
         android:layout_marginTop="28dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:background="@drawable/rectangle"
@@ -90,7 +90,7 @@
         <ImageView
             android:id="@+id/menu_quiz_img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/menu_quiz" />
 
@@ -115,7 +115,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:layout_below="@id/sub_title_square_quiz"
-            android:text="Test your knownledge about blockchain answering 3 questions to get APPC"
+            android:text="Test your knowledge about blockchain answering 3 questions to get APPC"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textStyle="normal"
@@ -137,7 +137,7 @@
             android:textStyle="normal"
             android:textColor="#e9645d"
             android:letterSpacing="0.09"
-            android:text="Play"
+            android:text="PLAY"
             />
 
 

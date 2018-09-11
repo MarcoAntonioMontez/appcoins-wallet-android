@@ -23,34 +23,122 @@
         android:layout_alignParentTop="true"
         app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/appcoins_quest_logo_long"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="21dp"
-        android:layout_marginRight="20dp"
-        android:fontFamily="sans-serif"
-        android:gravity="end"
-        android:text="Quiz Challenge"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal" />
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:id="@+id/question_index"
+    <RelativeLayout
+        android:id="@+id/questions_id_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/left_arrow_quiz"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.17"
-        android:lineSpacingExtra="20sp"
-        android:textColor="#ffffff"
-        android:textSize="12sp"
-        android:textStyle="normal"
-        android:text="Question     01     02     03" />
+        android:layout_marginLeft="20dp">
+
+
+        <TextView
+            android:id="@+id/question_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/left_arrow_quiz"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="0dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.17"
+            android:lineSpacingExtra="20sp"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="QUESTION " />
+
+        <TextView
+            android:id="@+id/question01_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/question_index"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="32dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.17"
+            android:lineSpacingExtra="20sp"
+            android:textColor="@color/grey_question"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="01" />
+
+        <ImageView
+            android:id="@+id/question_line_1"
+            android:layout_width="16dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/question01_text"
+            android:layout_toRightOf="@+id/question_index"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="0dp"
+            app:srcCompat="@drawable/ic_line_orange" />
+
+
+
+        <TextView
+            android:id="@+id/question02_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/question01_text"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="32dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.17"
+            android:lineSpacingExtra="20sp"
+            android:textColor="@color/grey_question"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="02" />
+
+        <ImageView
+            android:id="@+id/question_line_2"
+            android:layout_width="16dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/question02_text"
+            android:layout_toRightOf="@+id/question01_text"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="0dp"
+            app:srcCompat="@drawable/ic_line_orange" />
+
+        <TextView
+            android:id="@+id/question03_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/question02_text"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="32dp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.17"
+            android:lineSpacingExtra="20sp"
+            android:textColor="@color/grey_question"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:text="03" />
+
+        <ImageView
+            android:id="@+id/question_line_3"
+            android:layout_width="16dp"
+            android:layout_height="3dp"
+            android:layout_below="@+id/question03_text"
+            android:layout_toRightOf="@+id/question02_text"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="0dp"
+            app:srcCompat="@drawable/ic_line_orange" />
+
+
+    </RelativeLayout>
+
+
+
 
 
 
@@ -61,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_below="@+id/question_index"
+        android:layout_below="@+id/questions_id_layout"
         >
 
         <TextView
@@ -129,7 +217,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle"
-            android:elevation="@dimen/normal_margin"
+            android:elevation="@dimen/small_margin"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
@@ -151,7 +239,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle"
-            android:elevation="@dimen/normal_margin"
+            android:elevation="@dimen/small_margin"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
@@ -173,7 +261,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle"
-            android:elevation="@dimen/normal_margin"
+            android:elevation="@dimen/small_margin"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:layout_marginBottom="10dp"
@@ -195,7 +283,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle"
-            android:elevation="@dimen/normal_margin"
+            android:elevation="@dimen/small_margin"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:layout_marginBottom="30dp"
@@ -255,6 +343,15 @@
         app:srcCompat="@drawable/ic_primary_logo"
         />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/coins_animation"
+        android:layout_below="@+id/reward_menu_text"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        />
+
     <RelativeLayout
         android:id="@+id/timer_out_screen"
         android:layout_width="match_parent"
@@ -287,7 +384,7 @@
 
         <TextView
             android:id="@+id/sub_title_timer"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/timer_title"
             android:layout_centerHorizontal="true"
@@ -298,7 +395,7 @@
             android:textSize="12sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/white"
-            android:text="Don’t let the time go out or you will  \n miss the chance of earning more APPC."
+            android:text="Don’t let the time go out or you will  miss the chance of earning more APPC."
             android:visibility="visible"
             />
 
@@ -315,6 +412,7 @@
             android:text="Next"
             android:textAllCaps="true"
             android:visibility="visible"/>
+
 
 
     </RelativeLayout>

@@ -34,6 +34,8 @@ public interface QuizContract {
         void setQuizButtonsClickable(boolean isClickable);
         void runTimerAnimation();
         public void pauseTimerAnimation();
+        public void colorQuestionIndex(int questionId);
+        void runCoinsAnimation();
     }
 
     interface Presenter extends BasePresenter {

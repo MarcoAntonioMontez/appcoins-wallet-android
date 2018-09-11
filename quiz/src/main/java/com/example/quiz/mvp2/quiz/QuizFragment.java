@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -40,7 +41,6 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     TextView quizScoreText;
     TextView totalScoreText;
 
-
     Question currQuestion;
     LinkedList<Question> questionList;
     private final String TAG = "QuizFragment";
@@ -58,9 +58,19 @@ public class QuizFragment extends Fragment implements QuizContract.View{
     private int whiteText;
     private int grayText;
     private int blackText;
+    private int greyQuestionColor;
     private RelativeLayout timerOutScreen;
     private Button timerNextBtn;
-    LottieAnimationView timerAnimation;
+    private LottieAnimationView timerAnimation;
+    private TextView question01IndexText;
+    private TextView question02IndexText;
+    private TextView question03IndexText;
+    private ImageView question01IndexImg;
+    private ImageView question02IndexImg;
+    private ImageView question03IndexImg;
+    private ImageView prevBtn;
+    private  LottieAnimationView coinsAnimation;
+
 
 
     //RewardAdder
@@ -90,9 +100,20 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         idRedRectangleBackground = (int) R.drawable.rectangle_red;
         idGrayRectangleBackground = (int) R.drawable.rectangle_gray;
         idGreenRectangleBackground = (int) R.drawable.rectangle_green;
+        greyQuestionColor = (int) getResources().getColor(R.color.grey_question);
+
+        question01IndexText = (TextView) view.findViewById(R.id.question01_text);
+        question02IndexText = (TextView) view.findViewById(R.id.question02_text);
+        question03IndexText = (TextView) view.findViewById(R.id.question03_text);
+        question01IndexImg = (ImageView) view.findViewById(R.id.question_line_1);
+        question02IndexImg = (ImageView) view.findViewById(R.id.question_line_2);
+        question03IndexImg = (ImageView) view.findViewById(R.id.question_line_3);
+        prevBtn=(ImageView) view.findViewById(R.id.left_arrow_quiz);
+        coinsAnimation  = (LottieAnimationView) view.findViewById(R.id.coins_animation);
+        coinsAnimation.setAnimation("correct-answer.json");
 
         whiteText = Color.WHITE;
-        grayText = Color.BLACK;
+        grayText = getResources().getColor(R.color.grey_text);
         blackText = Color.BLACK;
 
         timerOutScreen= (RelativeLayout) view.findViewById(R.id.timer_out_screen);
@@ -165,6 +186,13 @@ public class QuizFragment extends Fragment implements QuizContract.View{
             @Override
             public void onAnimationRepeat(Animator animator) {
 
+            }
+        });
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myActivity.finish();
             }
         });
 
@@ -284,11 +312,14 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
         paintWrongAnswer(wrongButton);
+        wrongButton.setElevation(16.0f);
+        rightButton.setElevation(16.0f);
     }
 
     public void updateRightAnswerColors(TextView rightButton){
         updateButtonsColorWhenAnswered();
         paintCorrectAnswer(rightButton);
+        rightButton.setElevation(16.0f);
     }
 
     public void setRewardText(String text){
@@ -333,6 +364,7 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         quizBtnText2.setTextColor(grayText);
         quizBtnText3.setTextColor(grayText);
         quizBtnText4.setTextColor(grayText);
+
     }
 
     public void resetButtonsColor(){
@@ -345,6 +377,11 @@ public class QuizFragment extends Fragment implements QuizContract.View{
         quizBtnText2.setTextColor(blackText);
         quizBtnText3.setTextColor(blackText);
         quizBtnText4.setTextColor(blackText);
+
+        quizBtnText1.setElevation(4.0f);
+        quizBtnText2.setElevation(4.0f);
+        quizBtnText3.setElevation(4.0f);
+        quizBtnText4.setElevation(4.0f);
     }
 
 
@@ -379,6 +416,32 @@ public class QuizFragment extends Fragment implements QuizContract.View{
             quizBtnText3.setClickable(false);
             quizBtnText4.setClickable(false);
         }
+    }
+
+    @Override
+    public void colorQuestionIndex(int questionId){
+        question01IndexImg.setVisibility(View.INVISIBLE);
+        question02IndexImg.setVisibility(View.INVISIBLE);
+        question03IndexImg.setVisibility(View.INVISIBLE);
+        question01IndexText.setTextColor(greyQuestionColor);
+        question02IndexText.setTextColor(greyQuestionColor);
+        question03IndexText.setTextColor(greyQuestionColor);
+        if(questionId==1){
+            question01IndexImg.setVisibility(View.VISIBLE);
+            question01IndexText.setTextColor(Color.WHITE);
+        }else if(questionId==2){
+            question02IndexImg.setVisibility(View.VISIBLE);
+            question02IndexText.setTextColor(Color.WHITE);
+        }
+        else if(questionId==3){
+            question03IndexImg.setVisibility(View.VISIBLE);
+            question03IndexText.setTextColor(Color.WHITE);
+        }
+    }
+
+    @Override
+    public void runCoinsAnimation() {
+        coinsAnimation.playAnimation();
     }
 
 }

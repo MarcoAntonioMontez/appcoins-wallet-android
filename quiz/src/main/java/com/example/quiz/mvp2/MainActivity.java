@@ -9,6 +9,7 @@ import com.example.quiz.mvp2.loading.LoadingFragment;
 import com.example.quiz.mvp2.menu.MenuPresenter;
 import com.example.quiz.mvp2.menu.MenuWheelFragment;
 import com.example.quiz.mvp2.menu.QuizMenuFragment;
+import com.example.quiz.mvp2.menu.RewardMenuFragment;
 import com.example.quiz.mvp2.menu.WheelMenuDisabledFragment;
 import com.example.quiz.mvp2.quiz.QuizFragment;
 import com.example.quiz.mvp2.quiz.QuizPresenter;
@@ -138,6 +139,19 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigator
     @Override
     public void setWheelMenuDisabled() {
         WheelMenuDisabledFragment newFragment = new WheelMenuDisabledFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, newFragment);
+        //transaction.addToBackStack(null);
+        transaction.commit();
+
+        mPresenter = new MenuPresenter(newFragment,this, rewardSaver);
+    }
+
+    @Override
+    public void setRewardMenuFragment() {
+        RewardMenuFragment newFragment = new RewardMenuFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
