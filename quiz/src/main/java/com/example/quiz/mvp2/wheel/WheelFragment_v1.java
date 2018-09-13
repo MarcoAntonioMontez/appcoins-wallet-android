@@ -70,7 +70,7 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
         coinsAnimationView = (LottieAnimationView) view.findViewById(R.id.coins_animation);
         prevBtn = (ImageView) view.findViewById(R.id.left_arrow);
         animationView.setAnimation("final_wheel.json");
-        coinsAnimationView.setAnimation("coins.json");
+        coinsAnimationView.setAnimation("Coin-animation-v2.json");
         timerText = (TextView) view.findViewById(R.id.wheel_timer_text);
         rewardWallet=(TextView) view.findViewById(R.id.reward_wallet);
         playBtn = (Button) view.findViewById(R.id.play_btn);
@@ -112,7 +112,19 @@ public class WheelFragment_v1 extends Fragment implements  WheelContract.View{
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                mPresenter.changeFragment();
+                CountDownTimer countDownTimer1 = new CountDownTimer(2000, 1000) {
+                    @Override
+                    public void onTick(long l) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        mPresenter.changeFragment();
+                    }
+                }.start();
+
+
             }
 
             @Override
