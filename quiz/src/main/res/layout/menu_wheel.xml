@@ -54,7 +54,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="156dp"
         android:text="Feeling Lucky?"
-        android:textSize="26sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif"
         android:textColor="@color/black"/>
@@ -104,7 +104,7 @@
             android:layout_marginTop="10dp"
             android:layout_below="@id/menu_wheel_img"
             android:text="Lucky Wheel"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"/>
@@ -118,7 +118,7 @@
             android:layout_below="@id/sub_title_square_wheel"
             android:layout_marginTop="5dp"
             android:text="Try spinning the wheel to get free APPC"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             android:fontFamily="sans-serif"
             />
@@ -133,7 +133,7 @@
             android:layout_marginLeft="20dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:fontFamily="sans-serif"
             android:textStyle="normal"
             android:textColor="#e9645d"

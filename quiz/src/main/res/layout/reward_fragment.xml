@@ -69,20 +69,23 @@ Today you earned 2 APPC."
         android:layout_width="300dp"
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/ok_btn"/>
 
     <Button
         android:id="@+id/ok_btn"
         style="@style/ButtonStyle"
         android:layout_width="172dp"
         android:layout_height="@dimen/button_height"
-        android:layout_below="@+id/reward_cup_animation"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:paddingEnd="@dimen/half_large_margin"
         android:paddingStart="@dimen/half_large_margin"
         android:text="Ok"
-        android:textAllCaps="true" />
+        android:textAllCaps="true"
+        android:layout_marginBottom="30dp"/>
 
     <ImageView
         android:id="@+id/share_btn"
